@@ -7,15 +7,1019 @@
     android:layout_height="match_parent"
     tools:context=".DiceRollerDash"
     android:orientation="vertical"
-    android:background="?android:attr/colorPrimary">
+    android:background="?android:attr/colorPrimary"
+    tools:ignore="TooManyViews">
 
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hello World!"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/controls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/minus"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:text="@string/minus"
+            android:textSize="@dimen/_30ssp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            app:neumorph_lightSource="leftTop"
+            app:neumorph_shadowElevation="@dimen/_3sdp"
+            app:neumorph_shapeType="flat"
+            android:textAlignment="center"
+            android:textColor="#6e6d6d"/>
+
+        <TextView
+            android:id="@+id/diceNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/diceNumber"
+            tools:text="1"
+            android:layout_gravity="center"
+            android:textSize="@dimen/_32ssp"
+            android:textColor="#6e6d6d"/>
+
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/plus"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:text="@string/plus"
+            android:textSize="@dimen/_30ssp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            app:neumorph_lightSource="leftTop"
+            app:neumorph_shadowElevation="@dimen/_3sdp"
+            app:neumorph_shapeType="flat"
+            android:textAlignment="center"
+            android:textColor="#6e6d6d"/>
+
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/controls"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/diceRowOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/controls"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/diceOne"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                android:padding="@dimen/_20sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceOne_dotOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceOne_dotTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceOne_dotThree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceOne_dotFour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceOne_dotFive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceOne_dotSix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceOne_dotSeven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/diceTwo"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                android:padding="@dimen/_20sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceTwo_dotOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceTwo_dotTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceTwo_dotThree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceTwo_dotFour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceTwo_dotFive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceTwo_dotSix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceTwo_dotSeven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/diceThree"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                android:padding="@dimen/_20sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceThree_dotOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceThree_dotTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceThree_dotThree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceThree_dotFour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceThree_dotFive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceThree_dotSix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceThree_dotSeven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </soup.neumorphism.NeumorphCardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/diceRowTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/diceRowOne"
+            android:gravity="center">
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/diceFour"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                android:padding="@dimen/_20sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFour_dotOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFour_dotTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFour_dotThree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFour_dotFour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFour_dotFive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFour_dotSix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFour_dotSeven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/diceFive"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                android:padding="@dimen/_20sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFive_dotOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFive_dotTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFive_dotThree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFive_dotFour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFive_dotFive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFive_dotSix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceFive_dotSeven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/diceSix"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                android:padding="@dimen/_20sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSix_dotOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSix_dotTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSix_dotThree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSix_dotFour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_circle"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSix_dotFive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSix_dotSix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSix_dotSeven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </soup.neumorphism.NeumorphCardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/diceRowThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/diceRowTwo"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/diceSeven"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                android:padding="@dimen/_20sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSeven_dotOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSeven_dotTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSeven_dotThree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSeven_dotFour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSeven_dotFive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSeven_dotSix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceSeven_dotSeven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/diceEight"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                android:padding="@dimen/_20sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceEight_dotOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceEight_dotTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceEight_dotThree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceEight_dotFour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceEight_dotFive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceEight_dotSix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceEight_dotSeven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/diceNine"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp"
+                app:neumorph_shapeType="flat"
+                android:padding="@dimen/_20sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceNine_dotOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceNine_dotTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceNine_dotThree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceNine_dotFour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_circle" />
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceNine_dotFive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.33"
+                        android:orientation="horizontal">
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceNine_dotSix"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"/>
+
+                        <soup.neumorphism.NeumorphImageView
+                            android:id="@+id/diceNine_dotSeven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_circle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+        </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_35ssp"
+                android:text="@string/diceSum"
+                tools:text="1"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#6e6d6d"/>
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/roll_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:padding="@dimen/_20sdp"
+                android:text="@string/roll"
+                android:textColor="#6e6d6d"
+                android:textSize="@dimen/_40ssp"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowElevation="@dimen/_5sdp" />
+
+    </LinearLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
