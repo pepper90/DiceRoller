@@ -3,13 +3,31 @@ package com.jpdevzone.diceroller
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import com.jpdevzone.diceroller.databinding.DiceRollerDashBinding
 import kotlin.random.Random
 
 class DiceRollerDash : AppCompatActivity() {
     private lateinit var binding: DiceRollerDashBinding
-    private lateinit var rollButton: Button
+    private lateinit var minusButton: ImageView
+    private lateinit var plusButton: ImageView
+    private lateinit var diceNumber: TextView
+    private var clickCounter: Int = 1
+
+    private lateinit var dice1: ImageView
+    private lateinit var dice2: ImageView
+    private lateinit var dice3: ImageView
+    private lateinit var dice4: ImageView
+    private lateinit var dice5: ImageView
+    private lateinit var dice6: ImageView
+    private lateinit var dice7: ImageView
+    private lateinit var dice8: ImageView
+    private lateinit var dice9: ImageView
+
+    private lateinit var rollButton: ImageView
+    private lateinit var diceSum: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,256 +35,853 @@ class DiceRollerDash : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        rollButton = binding.rollButton
+        //Controls
+        minusButton = binding.btnMinus
+        plusButton = binding.btnPlus
+        diceNumber = binding.diceNumber
+
+        //Dices
+        dice1 = binding.dice1
+        dice2 = binding.dice2
+        dice3 = binding.dice3
+        dice4 = binding.dice4
+        dice5 = binding.dice5
+        dice6 = binding.dice6
+        dice7 = binding.dice7
+        dice8 = binding.dice8
+        dice9 = binding.dice9
+
+        //Roll button
+        rollButton = binding.btnRoll
+        diceSum = binding.diceSum
+
+        //Click minus button
+        minusButton.setOnClickListener {
+            if (diceSum.text != "0") {
+                diceSum.text = "0"
+            }
+            decreaseDices()
+        }
+
+        //Click plus button
+        plusButton.setOnClickListener {
+            if (diceSum.text != "0") {
+                diceSum.text = "0"
+            }
+            increaseDices()
+        }
+
+        //Roll dices on click
         rollButton.setOnClickListener {
-            rollTwoDices()
+            rollDices()
+        }
+    }
+
+    private fun increaseDices() {
+        clickCounter = (clickCounter + 1).coerceAtMost(9)
+        diceNumber.text = clickCounter.toString()
+
+        when (diceNumber.text) {
+            "1" -> {
+                invisible(dice1)
+                invisible(dice2)
+                invisible(dice3)
+                invisible(dice4)
+                visible(dice5)
+                setDice(dice5, R.drawable.dice1)
+                invisible(dice6)
+                invisible(dice7)
+                invisible(dice8)
+                invisible(dice9)
+            }
+            "2" -> {
+                invisible(dice1)
+                invisible(dice2)
+                invisible(dice3)
+                visible(dice4)
+                setDice(dice4, R.drawable.dice1)
+                invisible(dice5)
+                visible(dice6)
+                setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                invisible(dice7)
+                invisible(dice8)
+                invisible(dice9)
+            }
+            "3" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                invisible(dice3)
+                invisible(dice4)
+                visible(dice5)
+                setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                invisible(dice6)
+                invisible(dice7)
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            }
+            "4" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                invisible(dice4)
+                invisible(dice5)
+                invisible(dice6)
+                visible(dice7)
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, R.drawable.dice4)
+            }
+            "5" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                invisible(dice4)
+                visible(dice5)
+                setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                invisible(dice6)
+                visible(dice7)
+                setDice(dice7, R.drawable.dice4)
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, R.drawable.dice5)
+            }
+            "6" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice4)
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                invisible(dice5)
+                visible(dice6)
+                setDice(dice6, R.drawable.dice4)
+                visible(dice7)
+                setDice(dice7, R.drawable.dice5)
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+            }
+            "7" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice4)
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                visible(dice5)
+                setDice(dice5, R.drawable.dice4)
+                visible(dice6)
+                setDice(dice6, R.drawable.dice5)
+                visible(dice7)
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, R.drawable.dice1)
+            }
+            "8" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                visible(dice2)
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                visible(dice4)
+                setDice(dice4, R.drawable.dice4)
+                invisible(dice5)
+                visible(dice6)
+                setDice(dice6, R.drawable.dice5)
+                visible(dice7)
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+                visible(dice8)
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice9)
+                setDice(dice9, R.drawable.dice1)
+            }
+            "9" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                visible(dice2)
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                visible(dice4)
+                setDice(dice4, R.drawable.dice4)
+                visible(dice5)
+                setDice(dice5, R.drawable.dice5)
+                visible(dice6)
+                setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+                visible(dice7)
+                setDice(dice7, R.drawable.dice1)
+                visible(dice8)
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice9)
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            }
+        }
+    }
+
+    private fun decreaseDices() {
+        clickCounter = (clickCounter - 1).coerceAtLeast(1)
+        diceNumber.text = clickCounter.toString()
+
+        when (diceNumber.text) {
+            "1" -> {
+                invisible(dice1)
+                invisible(dice2)
+                invisible(dice3)
+                invisible(dice4)
+                visible(dice5)
+                setDice(dice5, R.drawable.dice1)
+                invisible(dice6)
+                invisible(dice7)
+                invisible(dice8)
+                invisible(dice9)
+            }
+            "2" -> {
+                invisible(dice1)
+                invisible(dice2)
+                invisible(dice3)
+                visible(dice4)
+                setDice(dice4, R.drawable.dice1)
+                invisible(dice5)
+                visible(dice6)
+                setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                invisible(dice7)
+                invisible(dice8)
+                invisible(dice9)
+            }
+            "3" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                invisible(dice3)
+                invisible(dice4)
+                visible(dice5)
+                setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                invisible(dice6)
+                invisible(dice7)
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            }
+            "4" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                invisible(dice4)
+                invisible(dice5)
+                invisible(dice6)
+                visible(dice7)
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, R.drawable.dice4)
+            }
+            "5" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                invisible(dice4)
+                visible(dice5)
+                setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                invisible(dice6)
+                visible(dice7)
+                setDice(dice7, R.drawable.dice4)
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, R.drawable.dice5)
+            }
+            "6" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice4)
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                invisible(dice5)
+                visible(dice6)
+                setDice(dice6, R.drawable.dice4)
+                visible(dice7)
+                setDice(dice7, R.drawable.dice5)
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+            }
+            "7" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                invisible(dice2)
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice4)
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                visible(dice5)
+                setDice(dice5, R.drawable.dice4)
+                visible(dice6)
+                setDice(dice6, R.drawable.dice5)
+                visible(dice7)
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+                invisible(dice8)
+                visible(dice9)
+                setDice(dice9, R.drawable.dice1)
+            }
+            "8" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                visible(dice2)
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                visible(dice4)
+                setDice(dice4, R.drawable.dice4)
+                invisible(dice5)
+                visible(dice6)
+                setDice(dice6, R.drawable.dice5)
+                visible(dice7)
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+                visible(dice8)
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice9)
+                setDice(dice9, R.drawable.dice1)
+            }
+            "9" -> {
+                visible(dice1)
+                setDice(dice1, R.drawable.dice1)
+                visible(dice2)
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice3)
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+                visible(dice4)
+                setDice(dice4, R.drawable.dice4)
+                visible(dice5)
+                setDice(dice5, R.drawable.dice5)
+                visible(dice6)
+                setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+                visible(dice7)
+                setDice(dice7, R.drawable.dice1)
+                visible(dice8)
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+                visible(dice9)
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            }
+        }
+    }
+
+    private fun rollDices() {
+        when (diceNumber.text) {
+            "1"-> rollOneDice()
+            "2" -> rollTwoDices()
+            "3" -> rollThreeDices()
+            "4" -> rollFourDices()
+            "5" -> rollFiveDices()
+            "6" -> rollSixDices()
+            "7" -> rollSevenDices()
+            "8" -> rollEightDices()
+            "9" -> rollNineDices()
         }
     }
 
     private fun rollOneDice() {
-        val score = binding.tvScore
-        val randomInt = Random.nextInt(6) + 1
-        score.text = randomInt.toString()
-
-        when (randomInt) {
-            1 -> {
-                binding.diceFiveDotOne.visibility = View.INVISIBLE
-                binding.diceFiveDotTwo.visibility = View.INVISIBLE
-                binding.diceFiveDotThree.visibility = View.INVISIBLE
-                binding.diceFiveDotFour.visibility = View.VISIBLE
-                binding.diceFiveDotFive.visibility = View.INVISIBLE
-                binding.diceFiveDotSix.visibility = View.INVISIBLE
-                binding.diceFiveDotSeven.visibility = View.INVISIBLE
-            }
-            2 -> {
-                binding.diceFiveDotOne.visibility = View.VISIBLE
-                binding.diceFiveDotTwo.visibility = View.INVISIBLE
-                binding.diceFiveDotThree.visibility = View.INVISIBLE
-                binding.diceFiveDotFour.visibility = View.INVISIBLE
-                binding.diceFiveDotFive.visibility = View.INVISIBLE
-                binding.diceFiveDotSix.visibility = View.INVISIBLE
-                binding.diceFiveDotSeven.visibility = View.VISIBLE
-            }
-            3 -> {
-                binding.diceFiveDotOne.visibility = View.VISIBLE
-                binding.diceFiveDotTwo.visibility = View.INVISIBLE
-                binding.diceFiveDotThree.visibility = View.INVISIBLE
-                binding.diceFiveDotFour.visibility = View.VISIBLE
-                binding.diceFiveDotFive.visibility = View.INVISIBLE
-                binding.diceFiveDotSix.visibility = View.INVISIBLE
-                binding.diceFiveDotSeven.visibility = View.VISIBLE
-            }
-            4 -> {
-                binding.diceFiveDotOne.visibility = View.VISIBLE
-                binding.diceFiveDotTwo.visibility = View.VISIBLE
-                binding.diceFiveDotThree.visibility = View.INVISIBLE
-                binding.diceFiveDotFour.visibility = View.INVISIBLE
-                binding.diceFiveDotFive.visibility = View.INVISIBLE
-                binding.diceFiveDotSix.visibility = View.VISIBLE
-                binding.diceFiveDotSeven.visibility = View.VISIBLE
-            }
-            5 -> {
-                binding.diceFiveDotOne.visibility = View.VISIBLE
-                binding.diceFiveDotTwo.visibility = View.VISIBLE
-                binding.diceFiveDotThree.visibility = View.INVISIBLE
-                binding.diceFiveDotFour.visibility = View.VISIBLE
-                binding.diceFiveDotFive.visibility = View.INVISIBLE
-                binding.diceFiveDotSix.visibility = View.VISIBLE
-                binding.diceFiveDotSeven.visibility = View.VISIBLE
-            }
-            6 -> {
-                binding.diceFiveDotOne.visibility = View.VISIBLE
-                binding.diceFiveDotTwo.visibility = View.VISIBLE
-                binding.diceFiveDotThree.visibility = View.VISIBLE
-                binding.diceFiveDotFour.visibility = View.INVISIBLE
-                binding.diceFiveDotFive.visibility = View.VISIBLE
-                binding.diceFiveDotSix.visibility = View.VISIBLE
-                binding.diceFiveDotSeven.visibility = View.VISIBLE
-            }
+        val randomInt1 = Random.nextInt(6)+1
+        when (randomInt1) {
+            1 -> setDice(dice5, R.drawable.dice1)
+            2 -> setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice5, R.drawable.dice4)
+            5 -> setDice(dice5, R.drawable.dice5)
+            6 -> setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
         }
+        diceSum.text = randomInt1.toString()
     }
 
     private fun rollTwoDices() {
-        val score = binding.tvScore
-        val randomIntDiceFour = Random.nextInt(6) + 1
-        val randomIntDiceSix = Random.nextInt(6) + 1
-        score.text = (randomIntDiceFour + randomIntDiceSix).toString()
-
-        when (randomIntDiceFour) {
-            1 -> {
-                binding.diceFourDotOne.visibility = View.INVISIBLE
-                binding.diceFourDotTwo.visibility = View.INVISIBLE
-                binding.diceFourDotThree.visibility = View.INVISIBLE
-                binding.diceFourDotFour.visibility = View.VISIBLE
-                binding.diceFourDotFive.visibility = View.INVISIBLE
-                binding.diceFourDotSix.visibility = View.INVISIBLE
-                binding.diceFourDotSeven.visibility = View.INVISIBLE
-            }
-            2 -> {
-                binding.diceFourDotOne.visibility = View.VISIBLE
-                binding.diceFourDotTwo.visibility = View.INVISIBLE
-                binding.diceFourDotThree.visibility = View.INVISIBLE
-                binding.diceFourDotFour.visibility = View.INVISIBLE
-                binding.diceFourDotFive.visibility = View.INVISIBLE
-                binding.diceFourDotSix.visibility = View.INVISIBLE
-                binding.diceFourDotSeven.visibility = View.VISIBLE
-            }
-            3 -> {
-                binding.diceFourDotOne.visibility = View.VISIBLE
-                binding.diceFourDotTwo.visibility = View.INVISIBLE
-                binding.diceFourDotThree.visibility = View.INVISIBLE
-                binding.diceFourDotFour.visibility = View.VISIBLE
-                binding.diceFourDotFive.visibility = View.INVISIBLE
-                binding.diceFourDotSix.visibility = View.INVISIBLE
-                binding.diceFourDotSeven.visibility = View.VISIBLE
-            }
-            4 -> {
-                binding.diceFourDotOne.visibility = View.VISIBLE
-                binding.diceFourDotTwo.visibility = View.VISIBLE
-                binding.diceFourDotThree.visibility = View.INVISIBLE
-                binding.diceFourDotFour.visibility = View.INVISIBLE
-                binding.diceFourDotFive.visibility = View.INVISIBLE
-                binding.diceFourDotSix.visibility = View.VISIBLE
-                binding.diceFourDotSeven.visibility = View.VISIBLE
-            }
-            5 -> {
-                binding.diceFourDotOne.visibility = View.VISIBLE
-                binding.diceFourDotTwo.visibility = View.VISIBLE
-                binding.diceFourDotThree.visibility = View.INVISIBLE
-                binding.diceFourDotFour.visibility = View.VISIBLE
-                binding.diceFourDotFive.visibility = View.INVISIBLE
-                binding.diceFiveDotSix.visibility = View.VISIBLE
-                binding.diceFiveDotSeven.visibility = View.VISIBLE
-            }
-            6 -> {
-                binding.diceFourDotOne.visibility = View.VISIBLE
-                binding.diceFourDotTwo.visibility = View.VISIBLE
-                binding.diceFourDotThree.visibility = View.VISIBLE
-                binding.diceFourDotFour.visibility = View.INVISIBLE
-                binding.diceFourDotFive.visibility = View.VISIBLE
-                binding.diceFourDotSix.visibility = View.VISIBLE
-                binding.diceFourDotSeven.visibility = View.VISIBLE
-            }
+        val randomInt1 = Random.nextInt(6)+1
+        val randomInt2 = Random.nextInt(6)+1
+        when (randomInt1) {
+            1 -> setDice(dice4, R.drawable.dice1)
+            2 -> setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice4, R.drawable.dice4)
+            5 -> setDice(dice4, R.drawable.dice5)
+            6 -> setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
         }
 
-        when (randomIntDiceSix) {
-            1 -> {
-                binding.diceSixDotOne.visibility = View.INVISIBLE
-                binding.diceSixDotTwo.visibility = View.INVISIBLE
-                binding.diceSixDotThree.visibility = View.INVISIBLE
-                binding.diceSixDotFour.visibility = View.VISIBLE
-                binding.diceSixDotFive.visibility = View.INVISIBLE
-                binding.diceSixDotSix.visibility = View.INVISIBLE
-                binding.diceSixDotSeven.visibility = View.INVISIBLE
-            }
-            2 -> {
-                binding.diceSixDotOne.visibility = View.VISIBLE
-                binding.diceSixDotTwo.visibility = View.INVISIBLE
-                binding.diceSixDotThree.visibility = View.INVISIBLE
-                binding.diceSixDotFour.visibility = View.INVISIBLE
-                binding.diceSixDotFive.visibility = View.INVISIBLE
-                binding.diceSixDotSix.visibility = View.INVISIBLE
-                binding.diceSixDotSeven.visibility = View.VISIBLE
-            }
-            3 -> {
-                binding.diceSixDotOne.visibility = View.VISIBLE
-                binding.diceSixDotTwo.visibility = View.INVISIBLE
-                binding.diceSixDotThree.visibility = View.INVISIBLE
-                binding.diceSixDotFour.visibility = View.VISIBLE
-                binding.diceSixDotFive.visibility = View.INVISIBLE
-                binding.diceSixDotSix.visibility = View.INVISIBLE
-                binding.diceSixDotSeven.visibility = View.VISIBLE
-            }
-            4 -> {
-                binding.diceSixDotOne.visibility = View.VISIBLE
-                binding.diceSixDotTwo.visibility = View.VISIBLE
-                binding.diceSixDotThree.visibility = View.INVISIBLE
-                binding.diceSixDotFour.visibility = View.INVISIBLE
-                binding.diceSixDotFive.visibility = View.INVISIBLE
-                binding.diceSixDotSix.visibility = View.VISIBLE
-                binding.diceSixDotSeven.visibility = View.VISIBLE
-            }
-            5 -> {
-                binding.diceSixDotOne.visibility = View.VISIBLE
-                binding.diceSixDotTwo.visibility = View.VISIBLE
-                binding.diceSixDotThree.visibility = View.INVISIBLE
-                binding.diceSixDotFour.visibility = View.VISIBLE
-                binding.diceSixDotFive.visibility = View.INVISIBLE
-                binding.diceSixDotSix.visibility = View.VISIBLE
-                binding.diceSixDotSeven.visibility = View.VISIBLE
-            }
-            6 -> {
-                binding.diceSixDotOne.visibility = View.VISIBLE
-                binding.diceSixDotTwo.visibility = View.VISIBLE
-                binding.diceSixDotThree.visibility = View.VISIBLE
-                binding.diceSixDotFour.visibility = View.INVISIBLE
-                binding.diceSixDotFive.visibility = View.VISIBLE
-                binding.diceSixDotSix.visibility = View.VISIBLE
-                binding.diceSixDotSeven.visibility = View.VISIBLE
-            }
+        when (randomInt2) {
+            1 -> setDice(dice6, R.drawable.dice1)
+            2 -> setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice6, R.drawable.dice4)
+            5 -> setDice(dice6, R.drawable.dice5)
+            6 -> setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
         }
+        diceSum.text = (randomInt1+randomInt2).toString()
     }
 
     private fun rollThreeDices() {
-        val score = binding.tvScore
-        val randomInt = Random.nextInt(6) + 1
-        score.text = randomInt.toString()
-
-        when (score.text.toString()) {
-            "1" -> {
-                binding.diceOneDotOne.visibility = View.INVISIBLE
-                binding.diceOneDotTwo.visibility = View.INVISIBLE
-                binding.diceOneDotThree.visibility = View.INVISIBLE
-                binding.diceOneDotFour.visibility = View.VISIBLE
-                binding.diceOneDotFive.visibility = View.INVISIBLE
-                binding.diceOneDotSix.visibility = View.INVISIBLE
-                binding.diceOneDotSeven.visibility = View.INVISIBLE
-            }
-            "2" -> {
-                binding.diceOneDotOne.visibility = View.VISIBLE
-                binding.diceOneDotTwo.visibility = View.INVISIBLE
-                binding.diceOneDotThree.visibility = View.INVISIBLE
-                binding.diceOneDotFour.visibility = View.INVISIBLE
-                binding.diceOneDotFive.visibility = View.INVISIBLE
-                binding.diceOneDotSix.visibility = View.INVISIBLE
-                binding.diceOneDotSeven.visibility = View.VISIBLE
-            }
-            "3" -> {
-                binding.diceOneDotOne.visibility = View.VISIBLE
-                binding.diceOneDotTwo.visibility = View.INVISIBLE
-                binding.diceOneDotThree.visibility = View.INVISIBLE
-                binding.diceOneDotFour.visibility = View.VISIBLE
-                binding.diceOneDotFive.visibility = View.INVISIBLE
-                binding.diceOneDotSix.visibility = View.INVISIBLE
-                binding.diceOneDotSeven.visibility = View.VISIBLE
-            }
-            "4" -> {
-                binding.diceOneDotOne.visibility = View.VISIBLE
-                binding.diceOneDotTwo.visibility = View.VISIBLE
-                binding.diceOneDotThree.visibility = View.INVISIBLE
-                binding.diceOneDotFour.visibility = View.INVISIBLE
-                binding.diceOneDotFive.visibility = View.INVISIBLE
-                binding.diceOneDotSix.visibility = View.VISIBLE
-                binding.diceOneDotSeven.visibility = View.VISIBLE
-            }
-            "5" -> {
-                binding.diceOneDotOne.visibility = View.VISIBLE
-                binding.diceOneDotTwo.visibility = View.VISIBLE
-                binding.diceOneDotThree.visibility = View.INVISIBLE
-                binding.diceOneDotFour.visibility = View.VISIBLE
-                binding.diceOneDotFive.visibility = View.INVISIBLE
-                binding.diceOneDotSix.visibility = View.VISIBLE
-                binding.diceOneDotSeven.visibility = View.VISIBLE
-            }
-            "6" -> {
-                binding.diceOneDotOne.visibility = View.VISIBLE
-                binding.diceOneDotTwo.visibility = View.VISIBLE
-                binding.diceOneDotThree.visibility = View.VISIBLE
-                binding.diceOneDotFour.visibility = View.INVISIBLE
-                binding.diceOneDotFive.visibility = View.VISIBLE
-                binding.diceOneDotSix.visibility = View.VISIBLE
-                binding.diceOneDotSeven.visibility = View.VISIBLE
-            }
+        val randomInt1 = Random.nextInt(6)+1
+        val randomInt2 = Random.nextInt(6)+1
+        val randomInt3 = Random.nextInt(6)+1
+        when (randomInt1) {
+            1 -> setDice(dice1, R.drawable.dice1)
+            2 -> setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice1, R.drawable.dice4)
+            5 -> setDice(dice1, R.drawable.dice5)
+            6 -> setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
         }
+
+        when (randomInt2) {
+            1 -> setDice(dice5, R.drawable.dice1)
+            2 -> setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice5, R.drawable.dice4)
+            5 -> setDice(dice5, R.drawable.dice5)
+            6 -> setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt3) {
+            1 -> setDice(dice9, R.drawable.dice1)
+            2 -> setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice9, R.drawable.dice4)
+            5 -> setDice(dice9, R.drawable.dice5)
+            6 -> setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+        diceSum.text = (randomInt1+randomInt2+randomInt3).toString()
     }
+
+    private fun rollFourDices() {
+        val randomInt1 = Random.nextInt(6)+1
+        val randomInt2 = Random.nextInt(6)+1
+        val randomInt3 = Random.nextInt(6)+1
+        val randomInt4 = Random.nextInt(6)+1
+        when (randomInt1) {
+            1 -> setDice(dice1, R.drawable.dice1)
+            2 -> setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice1, R.drawable.dice4)
+            5 -> setDice(dice1, R.drawable.dice5)
+            6 -> setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt2) {
+            1 -> setDice(dice3, R.drawable.dice1)
+            2 -> setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice3, R.drawable.dice4)
+            5 -> setDice(dice3, R.drawable.dice5)
+            6 -> setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt3) {
+            1 -> setDice(dice7, R.drawable.dice1)
+            2 -> setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice7, R.drawable.dice4)
+            5 -> setDice(dice7, R.drawable.dice5)
+            6 -> setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt4) {
+            1 -> setDice(dice9, R.drawable.dice1)
+            2 -> setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice9, R.drawable.dice4)
+            5 -> setDice(dice9, R.drawable.dice5)
+            6 -> setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+        diceSum.text = (randomInt1+randomInt2+randomInt3+randomInt4).toString()
+    }
+
+    private fun rollFiveDices() {
+        val randomInt1 = Random.nextInt(6)+1
+        val randomInt2 = Random.nextInt(6)+1
+        val randomInt3 = Random.nextInt(6)+1
+        val randomInt4 = Random.nextInt(6)+1
+        val randomInt5 = Random.nextInt(6)+1
+        when (randomInt1) {
+            1 -> setDice(dice1, R.drawable.dice1)
+            2 -> setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice1, R.drawable.dice4)
+            5 -> setDice(dice1, R.drawable.dice5)
+            6 -> setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt2) {
+            1 -> setDice(dice3, R.drawable.dice1)
+            2 -> setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice3, R.drawable.dice4)
+            5 -> setDice(dice3, R.drawable.dice5)
+            6 -> setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt3) {
+            1 -> setDice(dice5, R.drawable.dice1)
+            2 -> setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice5, R.drawable.dice4)
+            5 -> setDice(dice5, R.drawable.dice5)
+            6 -> setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt4) {
+            1 -> setDice(dice7, R.drawable.dice1)
+            2 -> setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice7, R.drawable.dice4)
+            5 -> setDice(dice7, R.drawable.dice5)
+            6 -> setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt5) {
+            1 -> setDice(dice9, R.drawable.dice1)
+            2 -> setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice9, R.drawable.dice4)
+            5 -> setDice(dice9, R.drawable.dice5)
+            6 -> setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+        diceSum.text = (randomInt1+randomInt2+randomInt3+randomInt4+randomInt5).toString()
+    }
+
+    private fun rollSixDices() {
+        val randomInt1 = Random.nextInt(6)+1
+        val randomInt2 = Random.nextInt(6)+1
+        val randomInt3 = Random.nextInt(6)+1
+        val randomInt4 = Random.nextInt(6)+1
+        val randomInt5 = Random.nextInt(6)+1
+        val randomInt6 = Random.nextInt(6)+1
+        when (randomInt1) {
+            1 -> setDice(dice1, R.drawable.dice1)
+            2 -> setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice1, R.drawable.dice4)
+            5 -> setDice(dice1, R.drawable.dice5)
+            6 -> setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt2) {
+            1 -> setDice(dice3, R.drawable.dice1)
+            2 -> setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice3, R.drawable.dice4)
+            5 -> setDice(dice3, R.drawable.dice5)
+            6 -> setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt3) {
+            1 -> setDice(dice4, R.drawable.dice1)
+            2 -> setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice4, R.drawable.dice4)
+            5 -> setDice(dice4, R.drawable.dice5)
+            6 -> setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt4) {
+            1 -> setDice(dice6, R.drawable.dice1)
+            2 -> setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice6, R.drawable.dice4)
+            5 -> setDice(dice6, R.drawable.dice5)
+            6 -> setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt5) {
+            1 -> setDice(dice7, R.drawable.dice1)
+            2 -> setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice7, R.drawable.dice4)
+            5 -> setDice(dice7, R.drawable.dice5)
+            6 -> setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt6) {
+            1 -> setDice(dice9, R.drawable.dice1)
+            2 -> setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice9, R.drawable.dice4)
+            5 -> setDice(dice9, R.drawable.dice5)
+            6 -> setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+        diceSum.text = (randomInt1+randomInt2+randomInt3+randomInt4+randomInt5+randomInt6).toString()
+    }
+
+    private fun rollSevenDices() {
+        val randomInt1 = Random.nextInt(6)+1
+        val randomInt2 = Random.nextInt(6)+1
+        val randomInt3 = Random.nextInt(6)+1
+        val randomInt4 = Random.nextInt(6)+1
+        val randomInt5 = Random.nextInt(6)+1
+        val randomInt6 = Random.nextInt(6)+1
+        val randomInt7 = Random.nextInt(6)+1
+        when (randomInt1) {
+            1 -> setDice(dice1, R.drawable.dice1)
+            2 -> setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice1, R.drawable.dice4)
+            5 -> setDice(dice1, R.drawable.dice5)
+            6 -> setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt2) {
+            1 -> setDice(dice3, R.drawable.dice1)
+            2 -> setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice3, R.drawable.dice4)
+            5 -> setDice(dice3, R.drawable.dice5)
+            6 -> setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt3) {
+            1 -> setDice(dice4, R.drawable.dice1)
+            2 -> setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice4, R.drawable.dice4)
+            5 -> setDice(dice4, R.drawable.dice5)
+            6 -> setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt4) {
+            1 -> setDice(dice5, R.drawable.dice1)
+            2 -> setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice5, R.drawable.dice4)
+            5 -> setDice(dice5, R.drawable.dice5)
+            6 -> setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt5) {
+            1 -> setDice(dice6, R.drawable.dice1)
+            2 -> setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice6, R.drawable.dice4)
+            5 -> setDice(dice6, R.drawable.dice5)
+            6 -> setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt6) {
+            1 -> setDice(dice7, R.drawable.dice1)
+            2 -> setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice7, R.drawable.dice4)
+            5 -> setDice(dice7, R.drawable.dice5)
+            6 -> setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt7) {
+            1 -> setDice(dice9, R.drawable.dice1)
+            2 -> setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice9, R.drawable.dice4)
+            5 -> setDice(dice9, R.drawable.dice5)
+            6 -> setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+        diceSum.text = (randomInt1+randomInt2+randomInt3+randomInt4+randomInt5+randomInt6+randomInt7).toString()
+    }
+
+    private fun rollEightDices() {
+        val randomInt1 = Random.nextInt(6)+1
+        val randomInt2 = Random.nextInt(6)+1
+        val randomInt3 = Random.nextInt(6)+1
+        val randomInt4 = Random.nextInt(6)+1
+        val randomInt5 = Random.nextInt(6)+1
+        val randomInt6 = Random.nextInt(6)+1
+        val randomInt7 = Random.nextInt(6)+1
+        val randomInt8 = Random.nextInt(6)+1
+        when (randomInt1) {
+            1 -> setDice(dice1, R.drawable.dice1)
+            2 -> setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice1, R.drawable.dice4)
+            5 -> setDice(dice1, R.drawable.dice5)
+            6 -> setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt2) {
+            1 -> setDice(dice2, R.drawable.dice1)
+            2 -> setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice2, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice2, R.drawable.dice4)
+            5 -> setDice(dice2, R.drawable.dice5)
+            6 -> setDice(dice2, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt3) {
+            1 -> setDice(dice3, R.drawable.dice1)
+            2 -> setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice3, R.drawable.dice4)
+            5 -> setDice(dice3, R.drawable.dice5)
+            6 -> setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt4) {
+            1 -> setDice(dice4, R.drawable.dice1)
+            2 -> setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice4, R.drawable.dice4)
+            5 -> setDice(dice4, R.drawable.dice5)
+            6 -> setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt5) {
+            1 -> setDice(dice6, R.drawable.dice1)
+            2 -> setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice6, R.drawable.dice4)
+            5 -> setDice(dice6, R.drawable.dice5)
+            6 -> setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt6) {
+            1 -> setDice(dice7, R.drawable.dice1)
+            2 -> setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice7, R.drawable.dice4)
+            5 -> setDice(dice7, R.drawable.dice5)
+            6 -> setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt7) {
+            1 -> setDice(dice8, R.drawable.dice1)
+            2 -> setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice8, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice8, R.drawable.dice4)
+            5 -> setDice(dice8, R.drawable.dice5)
+            6 -> setDice(dice8, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt8) {
+            1 -> setDice(dice9, R.drawable.dice1)
+            2 -> setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice9, R.drawable.dice4)
+            5 -> setDice(dice9, R.drawable.dice5)
+            6 -> setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+        diceSum.text = (randomInt1+randomInt2+randomInt3+randomInt4+randomInt5+randomInt6+randomInt7+randomInt8).toString()
+    }
+
+    private fun rollNineDices() {
+        val randomInt1 = Random.nextInt(6)+1
+        val randomInt2 = Random.nextInt(6)+1
+        val randomInt3 = Random.nextInt(6)+1
+        val randomInt4 = Random.nextInt(6)+1
+        val randomInt5 = Random.nextInt(6)+1
+        val randomInt6 = Random.nextInt(6)+1
+        val randomInt7 = Random.nextInt(6)+1
+        val randomInt8 = Random.nextInt(6)+1
+        val randomInt9 = Random.nextInt(6)+1
+        when (randomInt1) {
+            1 -> setDice(dice1, R.drawable.dice1)
+            2 -> setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice1, R.drawable.dice4)
+            5 -> setDice(dice1, R.drawable.dice5)
+            6 -> setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt2) {
+            1 -> setDice(dice2, R.drawable.dice1)
+            2 -> setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice2, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice2, R.drawable.dice4)
+            5 -> setDice(dice2, R.drawable.dice5)
+            6 -> setDice(dice2, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt3) {
+            1 -> setDice(dice3, R.drawable.dice1)
+            2 -> setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice3, R.drawable.dice4)
+            5 -> setDice(dice3, R.drawable.dice5)
+            6 -> setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt4) {
+            1 -> setDice(dice4, R.drawable.dice1)
+            2 -> setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice4, R.drawable.dice4)
+            5 -> setDice(dice4, R.drawable.dice5)
+            6 -> setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt5) {
+            1 -> setDice(dice5, R.drawable.dice1)
+            2 -> setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice5, R.drawable.dice4)
+            5 -> setDice(dice5, R.drawable.dice5)
+            6 -> setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt6) {
+            1 -> setDice(dice6, R.drawable.dice1)
+            2 -> setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice6, R.drawable.dice4)
+            5 -> setDice(dice6, R.drawable.dice5)
+            6 -> setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt7) {
+            1 -> setDice(dice7, R.drawable.dice1)
+            2 -> setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice7, R.drawable.dice4)
+            5 -> setDice(dice7, R.drawable.dice5)
+            6 -> setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt8) {
+            1 -> setDice(dice8, R.drawable.dice1)
+            2 -> setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice8, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice8, R.drawable.dice4)
+            5 -> setDice(dice8, R.drawable.dice5)
+            6 -> setDice(dice8, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+
+        when (randomInt9) {
+            1 -> setDice(dice9, R.drawable.dice1)
+            2 -> setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
+            3 -> setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
+            4 -> setDice(dice9, R.drawable.dice4)
+            5 -> setDice(dice9, R.drawable.dice5)
+            6 -> setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
+        }
+        diceSum.text = (randomInt1+randomInt2+randomInt3+randomInt4+randomInt5+randomInt6+randomInt7+randomInt8+randomInt9).toString()
+    }
+
+    private fun visible(view: View) {
+        view.visibility = View.VISIBLE
+    }
+
+    private fun invisible(view: View) {
+        view.visibility = View.INVISIBLE
+    }
+
+    private fun setDice(view: ImageView, layout: Int) {
+        view.setImageResource(layout)
+    }
+
 }
