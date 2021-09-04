@@ -1,18 +1,20 @@
 package com.jpdevzone.diceroller
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.jpdevzone.diceroller.databinding.DiceRollerDashBinding
+import com.jpdevzone.diceroller.databinding.DiceRollerDashLightBinding
 import kotlin.random.Random
 
-class DiceRollerDash : AppCompatActivity() {
-    private lateinit var binding: DiceRollerDashBinding
+class DiceRollerDashLight : AppCompatActivity() {
+    private lateinit var binding: DiceRollerDashLightBinding
     private lateinit var minusButton: ImageView
     private lateinit var plusButton: ImageView
     private lateinit var diceNumber: TextView
+    private lateinit var themePicker: ImageView
     private var clickCounter: Int = 1
 
     private lateinit var dice1: ImageView
@@ -31,7 +33,7 @@ class DiceRollerDash : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DiceRollerDashBinding.inflate(layoutInflater)
+        binding = DiceRollerDashLightBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -39,6 +41,7 @@ class DiceRollerDash : AppCompatActivity() {
         minusButton = binding.btnMinus
         plusButton = binding.btnPlus
         diceNumber = binding.diceNumber
+        themePicker = binding.btnTheme
 
         //Dices
         dice1 = binding.dice1
@@ -69,6 +72,15 @@ class DiceRollerDash : AppCompatActivity() {
                 diceSum.text = "0"
             }
             increaseDices()
+        }
+
+        //Select theme
+        themePicker.setOnClickListener {
+            val intent = Intent(this, DiceRollerDashDark::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            overridePendingTransition(0, 0)
+            startActivity(intent)
+            finish()
         }
 
         //Roll dices on click
