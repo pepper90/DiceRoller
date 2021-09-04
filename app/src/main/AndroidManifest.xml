@@ -17,19 +17,18 @@
             android:name=".DiceRollerDashDark"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBarThemeDark">
+            android:theme="@style/NoActionBarThemeDark"/>
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".DiceRollerDashLight"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionBarThemeLight">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
