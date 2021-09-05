@@ -3,4 +3,5 @@
     <string name="diceNumber">1</string>
     <string name="diceSum">0</string>
     <string name="roll">LET\'S ROLL</string>
+    <string name="toast">Press again to EXIT.</string>
 </resources>

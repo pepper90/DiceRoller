@@ -4,4 +4,5 @@
     <color name="text_color_light">#6E6D6D</color>
     <color name="text_color_dark">#EFEEEE</color>
     <color name="accent_dark">#555555</color>
+    <color name="toast">#222222</color>
 </resources>

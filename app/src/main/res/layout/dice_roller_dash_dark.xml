@@ -26,6 +26,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/controls" />
 
+    <ImageView
+        android:id="@+id/btnMute"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/accent_dark"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/bg_btn_mute_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/controls" />
+
     <LinearLayout
         android:id="@+id/controls"
         android:layout_width="match_parent"

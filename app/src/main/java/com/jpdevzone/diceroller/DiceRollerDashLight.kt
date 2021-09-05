@@ -1,5 +1,6 @@
 package com.jpdevzone.diceroller
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,12 +9,14 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.jpdevzone.diceroller.databinding.DiceRollerDashLightBinding
+import es.dmoral.toasty.Toasty
 import kotlin.random.Random
 
 class DiceRollerDashLight : AppCompatActivity() {
@@ -38,12 +41,16 @@ class DiceRollerDashLight : AppCompatActivity() {
     private lateinit var diceSum: TextView
 
     private var mInterstitialAd: InterstitialAd? = null
+    private var counter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DiceRollerDashLightBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        //Load shared prefs
+        loadData()
 
         //Controls
         minusButton = binding.btnMinus
@@ -1770,4 +1777,31 @@ class DiceRollerDashLight : AppCompatActivity() {
         view.animation = anim
     }
 
+    private fun saveData() {
+        val sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt(Constants.AD_COUNTER, Constants.adCounter)
+        editor.apply()
+    }
+
+    private fun loadData() {
+        val sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        Constants.adCounter = sharedPreferences.getInt(Constants.AD_COUNTER, 0)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveData()
+    }
+
+    override fun onBackPressed() {
+        counter++
+        if (counter==1) {
+            saveData()
+            Toasty.custom(this, R.string.toast,R.drawable.ic_exit,R.color.toast,
+                Toast.LENGTH_LONG,true, true).show()
+        } else {
+            finish()
+        }
+    }
 }
