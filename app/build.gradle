@@ -12,7 +12,10 @@ android {
         targetSdk 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
+        ndk {
+            debugSymbolLevel 'FULL'
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -47,4 +50,5 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.google.android.gms:play-services-ads:20.3.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }

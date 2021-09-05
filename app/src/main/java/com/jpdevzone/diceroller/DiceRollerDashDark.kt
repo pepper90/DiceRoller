@@ -8,6 +8,11 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.jpdevzone.diceroller.databinding.DiceRollerDashDarkBinding
 import kotlin.random.Random
 
@@ -31,6 +36,8 @@ class DiceRollerDashDark : AppCompatActivity() {
 
     private lateinit var rollButton: ImageView
     private lateinit var diceSum: TextView
+
+    private var mInterstitialAd: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +73,7 @@ class DiceRollerDashDark : AppCompatActivity() {
                 diceSum.text = "0"
             }
             decreaseDices()
+            showAd()
         }
 
         //Click plus button
@@ -74,6 +82,7 @@ class DiceRollerDashDark : AppCompatActivity() {
                 diceSum.text = "0"
             }
             increaseDices()
+            showAd()
         }
 
         //Select theme
@@ -89,6 +98,40 @@ class DiceRollerDashDark : AppCompatActivity() {
         rollButton.setOnClickListener {
             rollDices()
         }
+
+        MobileAds.initialize(this) {}
+        createPersonalizedAdd()
+    }
+
+    private fun showAd() {
+        Constants.adCounter++
+        when (Constants.adCounter % 5 == 0) {
+            true -> {
+                if (mInterstitialAd != null) {
+                    mInterstitialAd?.show(this)
+                    createPersonalizedAdd()
+                } else {
+                    createPersonalizedAdd()
+                }
+            }
+        }
+    }
+
+    private fun createPersonalizedAdd() {
+        val adRequest = AdRequest.Builder().build()
+        createInterstitialAdd(adRequest)
+    }
+
+    private fun createInterstitialAdd(adRequest: AdRequest) {
+        InterstitialAd.load(this,"ca-app-pub-7588987461083278/9903474518", adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                mInterstitialAd = interstitialAd
+            }
+        })
     }
 
     private fun increaseDices() {
