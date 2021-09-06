@@ -140,6 +140,7 @@ class DiceRollerDashLight : AppCompatActivity() {
         }
 
         rollSound = soundPool.load(this, R.raw.roll_sound, 1)
+        Constants.isClicked = false
 
         muteButton.setOnClickListener {
             when (Constants.isClicked) {
