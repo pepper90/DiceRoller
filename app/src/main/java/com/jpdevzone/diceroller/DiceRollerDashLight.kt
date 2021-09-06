@@ -2,6 +2,7 @@ package com.jpdevzone.diceroller
 
 import android.content.Context
 import android.content.Intent
+import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -18,9 +19,16 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.jpdevzone.diceroller.databinding.DiceRollerDashLightBinding
 import es.dmoral.toasty.Toasty
 import kotlin.random.Random
+import android.media.AudioManager
+import android.media.AudioAttributes
+import android.os.Build
+
+
+
 
 class DiceRollerDashLight : AppCompatActivity() {
     private lateinit var binding: DiceRollerDashLightBinding
+    private lateinit var muteButton: ImageView
     private lateinit var minusButton: ImageView
     private lateinit var plusButton: ImageView
     private lateinit var diceNumber: TextView
@@ -40,6 +48,9 @@ class DiceRollerDashLight : AppCompatActivity() {
     private lateinit var rollButton: ImageView
     private lateinit var diceSum: TextView
 
+    private lateinit var soundPool: SoundPool
+    private var rollSound: Int? = null
+
     private var mInterstitialAd: InterstitialAd? = null
     private var counter = 0
 
@@ -53,6 +64,7 @@ class DiceRollerDashLight : AppCompatActivity() {
         loadData()
 
         //Controls
+        muteButton = binding.btnMute
         minusButton = binding.btnMinus
         plusButton = binding.btnPlus
         diceNumber = binding.diceNumber
@@ -72,6 +84,9 @@ class DiceRollerDashLight : AppCompatActivity() {
         //Roll button
         rollButton = binding.btnRoll
         diceSum = binding.diceSum
+
+        //Click mute button
+        muteUnmuteSound()
 
         //Click minus button
         minusButton.setOnClickListener {
@@ -107,6 +122,39 @@ class DiceRollerDashLight : AppCompatActivity() {
 
         MobileAds.initialize(this) {}
         createPersonalizedAdd()
+    }
+
+    @Suppress("DEPRECATION")
+    private fun muteUnmuteSound() {
+        soundPool = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val audioAttributes = AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build()
+            SoundPool.Builder()
+                .setMaxStreams(1)
+                .setAudioAttributes(audioAttributes)
+                .build()
+        } else {
+            SoundPool(1, AudioManager.STREAM_MUSIC, 0)
+        }
+
+        rollSound = soundPool.load(this, R.raw.roll_sound, 1)
+
+        muteButton.setOnClickListener {
+            when (Constants.isClicked) {
+                false -> {
+                    muteButton.setImageResource(R.drawable.bg_btn_mute)
+                    Constants.isClicked = true
+                    rollSound = null
+                }
+                true -> {
+                    muteButton.setImageResource(R.drawable.bg_btn_unmute)
+                    Constants.isClicked = false
+                    rollSound = soundPool.load(this, R.raw.roll_sound, 1)
+                }
+            }
+        }
     }
 
     private fun showAd() {
@@ -456,6 +504,7 @@ class DiceRollerDashLight : AppCompatActivity() {
             "8" -> rollEightDices()
             "9" -> rollNineDices()
         }
+        rollSound?.let { soundPool.play(it, 1f, 1f, 0, 0, 1f) }
     }
 
     private fun rollOneDice() {
@@ -1803,5 +1852,10 @@ class DiceRollerDashLight : AppCompatActivity() {
         } else {
             finish()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        soundPool.release()
     }
 }

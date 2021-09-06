@@ -33,7 +33,7 @@
         android:background="@color/accent_dark"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/bg_btn_mute_dark"
+        android:src="@drawable/bg_btn_unmute_dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/controls" />
 

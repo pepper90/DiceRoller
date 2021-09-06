@@ -33,7 +33,7 @@
         android:background="@color/accent_light"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/bg_btn_mute"
+        android:src="@drawable/bg_btn_unmute"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/controls" />
 
