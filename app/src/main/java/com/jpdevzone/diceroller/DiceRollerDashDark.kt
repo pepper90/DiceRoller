@@ -138,18 +138,18 @@ class DiceRollerDashDark : AppCompatActivity() {
         }
 
         rollSound = soundPool.load(this, R.raw.roll_sound, 1)
-        Constants.isClickedDark = false
+        Constants.isClicked= false
 
         muteButton.setOnClickListener {
-            when (Constants.isClickedDark) {
+            when (Constants.isClicked) {
                 false -> {
                     muteButton.setImageResource(R.drawable.bg_btn_mute_dark)
-                    Constants.isClickedDark = true
+                    Constants.isClicked = true
                     rollSound = null
                 }
                 true -> {
                     muteButton.setImageResource(R.drawable.bg_btn_unmute_dark)
-                    Constants.isClickedDark = false
+                    Constants.isClicked = false
                     rollSound = soundPool.load(this, R.raw.roll_sound, 1)
                 }
             }
