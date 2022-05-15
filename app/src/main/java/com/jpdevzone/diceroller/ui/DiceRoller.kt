@@ -1,12 +1,10 @@
-package com.jpdevzone.diceroller.activities
+package com.jpdevzone.diceroller.ui
 
 import android.content.Context
-import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -14,6 +12,7 @@ import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
@@ -21,12 +20,13 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.jpdevzone.diceroller.Constants
 import com.jpdevzone.diceroller.R
-import com.jpdevzone.diceroller.databinding.DiceRollerDashDarkBinding
+import com.jpdevzone.diceroller.databinding.DiceRollerBinding
 import es.dmoral.toasty.Toasty
 import kotlin.random.Random
 
-class DiceRollerDashDark : AppCompatActivity() {
-    private lateinit var binding: DiceRollerDashDarkBinding
+
+class DiceRoller : AppCompatActivity() {
+    private lateinit var binding: DiceRollerBinding
     private lateinit var muteButton: ImageView
     private lateinit var minusButton: ImageView
     private lateinit var plusButton: ImageView
@@ -55,7 +55,7 @@ class DiceRollerDashDark : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DiceRollerDashDarkBinding.inflate(layoutInflater)
+        binding = DiceRollerBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -68,7 +68,6 @@ class DiceRollerDashDark : AppCompatActivity() {
         plusButton = binding.btnPlus
         diceNumber = binding.diceNumber
         themePicker = binding.btnTheme
-
 
         //Dices
         dice1 = binding.dice1
@@ -108,11 +107,11 @@ class DiceRollerDashDark : AppCompatActivity() {
 
         //Select theme
         themePicker.setOnClickListener {
-            val intent = Intent(this, DiceRollerDashLight::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            overridePendingTransition(0, 0)
-            startActivity(intent)
-            finish()
+//            val intent = Intent(this, DiceRollerDashDark::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+//            overridePendingTransition(0, 0)
+//            startActivity(intent)
+//            finish()
         }
 
         //Roll dices on click
@@ -145,12 +144,12 @@ class DiceRollerDashDark : AppCompatActivity() {
         muteButton.setOnClickListener {
             when (Constants.isClicked) {
                 false -> {
-                    muteButton.setImageResource(R.drawable.bg_btn_mute_dark)
+                    muteButton.setImageResource(R.drawable.bg_btn_mute)
                     Constants.isClicked = true
                     rollSound = null
                 }
                 true -> {
-                    muteButton.setImageResource(R.drawable.bg_btn_unmute_dark)
+                    muteButton.setImageResource(R.drawable.bg_btn_unmute)
                     Constants.isClicked = false
                     rollSound = soundPool.load(this, R.raw.roll_sound, 1)
                 }
@@ -200,7 +199,7 @@ class DiceRollerDashDark : AppCompatActivity() {
                 invisible(dice3)
                 invisible(dice4)
                 visible(dice5)
-                setDice(dice5, R.drawable.dice1_dark)
+                setDice(dice5, R.drawable.dice1)
                 invisible(dice6)
                 invisible(dice7)
                 invisible(dice8)
@@ -211,132 +210,132 @@ class DiceRollerDashDark : AppCompatActivity() {
                 invisible(dice2)
                 invisible(dice3)
                 visible(dice4)
-                setDice(dice4, R.drawable.dice1_dark)
+                setDice(dice4, R.drawable.dice1)
                 invisible(dice5)
                 visible(dice6)
-                setDice(dice6, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 invisible(dice7)
                 invisible(dice8)
                 invisible(dice9)
             }
             "3" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 invisible(dice3)
                 invisible(dice4)
                 visible(dice5)
-                setDice(dice5, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 invisible(dice6)
                 invisible(dice7)
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
             }
             "4" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 invisible(dice4)
                 invisible(dice5)
                 invisible(dice6)
                 visible(dice7)
-                setDice(dice7, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, R.drawable.dice4_dark)
+                setDice(dice9, R.drawable.dice4)
             }
             "5" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 invisible(dice4)
                 visible(dice5)
-                setDice(dice5, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 invisible(dice6)
                 visible(dice7)
-                setDice(dice7, R.drawable.dice4_dark)
+                setDice(dice7, R.drawable.dice4)
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, R.drawable.dice5_dark)
+                setDice(dice9, R.drawable.dice5)
             }
             "6" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice4)
-                setDice(dice4, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 invisible(dice5)
                 visible(dice6)
-                setDice(dice6, R.drawable.dice4_dark)
+                setDice(dice6, R.drawable.dice4)
                 visible(dice7)
-                setDice(dice7, R.drawable.dice5_dark)
+                setDice(dice7, R.drawable.dice5)
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
             }
             "7" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice4)
-                setDice(dice4, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 visible(dice5)
-                setDice(dice5, R.drawable.dice4_dark)
+                setDice(dice5, R.drawable.dice4)
                 visible(dice6)
-                setDice(dice6, R.drawable.dice5_dark)
+                setDice(dice6, R.drawable.dice5)
                 visible(dice7)
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
             }
             "8" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 visible(dice2)
-                setDice(dice2, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 visible(dice4)
-                setDice(dice4, R.drawable.dice4_dark)
+                setDice(dice4, R.drawable.dice4)
                 invisible(dice5)
                 visible(dice6)
-                setDice(dice6, R.drawable.dice5_dark)
+                setDice(dice6, R.drawable.dice5)
                 visible(dice7)
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 visible(dice8)
-                setDice(dice8, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice9)
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
             }
             "9" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 visible(dice2)
-                setDice(dice2, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 visible(dice4)
-                setDice(dice4, R.drawable.dice4_dark)
+                setDice(dice4, R.drawable.dice4)
                 visible(dice5)
-                setDice(dice5, R.drawable.dice5_dark)
+                setDice(dice5, R.drawable.dice5)
                 visible(dice6)
-                setDice(dice6, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 visible(dice7)
-                setDice(dice7, R.drawable.dice1_dark)
+                setDice(dice7, R.drawable.dice1)
                 visible(dice8)
-                setDice(dice8, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice9)
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
             }
         }
     }
@@ -352,7 +351,7 @@ class DiceRollerDashDark : AppCompatActivity() {
                 invisible(dice3)
                 invisible(dice4)
                 visible(dice5)
-                setDice(dice5, R.drawable.dice1_dark)
+                setDice(dice5, R.drawable.dice1)
                 invisible(dice6)
                 invisible(dice7)
                 invisible(dice8)
@@ -363,132 +362,132 @@ class DiceRollerDashDark : AppCompatActivity() {
                 invisible(dice2)
                 invisible(dice3)
                 visible(dice4)
-                setDice(dice4, R.drawable.dice1_dark)
+                setDice(dice4, R.drawable.dice1)
                 invisible(dice5)
                 visible(dice6)
-                setDice(dice6, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 invisible(dice7)
                 invisible(dice8)
                 invisible(dice9)
             }
             "3" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 invisible(dice3)
                 invisible(dice4)
                 visible(dice5)
-                setDice(dice5, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 invisible(dice6)
                 invisible(dice7)
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
             }
             "4" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 invisible(dice4)
                 invisible(dice5)
                 invisible(dice6)
                 visible(dice7)
-                setDice(dice7, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, R.drawable.dice4_dark)
+                setDice(dice9, R.drawable.dice4)
             }
             "5" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 invisible(dice4)
                 visible(dice5)
-                setDice(dice5, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 invisible(dice6)
                 visible(dice7)
-                setDice(dice7, R.drawable.dice4_dark)
+                setDice(dice7, R.drawable.dice4)
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, R.drawable.dice5_dark)
+                setDice(dice9, R.drawable.dice5)
             }
             "6" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice4)
-                setDice(dice4, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 invisible(dice5)
                 visible(dice6)
-                setDice(dice6, R.drawable.dice4_dark)
+                setDice(dice6, R.drawable.dice4)
                 visible(dice7)
-                setDice(dice7, R.drawable.dice5_dark)
+                setDice(dice7, R.drawable.dice5)
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
             }
             "7" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 invisible(dice2)
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice4)
-                setDice(dice4, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 visible(dice5)
-                setDice(dice5, R.drawable.dice4_dark)
+                setDice(dice5, R.drawable.dice4)
                 visible(dice6)
-                setDice(dice6, R.drawable.dice5_dark)
+                setDice(dice6, R.drawable.dice5)
                 visible(dice7)
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 invisible(dice8)
                 visible(dice9)
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
             }
             "8" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 visible(dice2)
-                setDice(dice2, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 visible(dice4)
-                setDice(dice4, R.drawable.dice4_dark)
+                setDice(dice4, R.drawable.dice4)
                 invisible(dice5)
                 visible(dice6)
-                setDice(dice6, R.drawable.dice5_dark)
+                setDice(dice6, R.drawable.dice5)
                 visible(dice7)
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 visible(dice8)
-                setDice(dice8, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice9)
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
             }
             "9" -> {
                 visible(dice1)
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 visible(dice2)
-                setDice(dice2, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice3)
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 visible(dice4)
-                setDice(dice4, R.drawable.dice4_dark)
+                setDice(dice4, R.drawable.dice4)
                 visible(dice5)
-                setDice(dice5, R.drawable.dice5_dark)
+                setDice(dice5, R.drawable.dice5)
                 visible(dice6)
-                setDice(dice6, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 visible(dice7)
-                setDice(dice7, R.drawable.dice1_dark)
+                setDice(dice7, R.drawable.dice1)
                 visible(dice8)
-                setDice(dice8, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 visible(dice9)
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
             }
         }
     }
@@ -512,27 +511,27 @@ class DiceRollerDashDark : AppCompatActivity() {
         val randomInt1 = Random.nextInt(6)+1
         when (randomInt1) {
             1 -> {
-                setDice(dice5, R.drawable.dice1_dark)
+                setDice(dice5, R.drawable.dice1)
                 animate(dice5)
             }
             2 -> {
-                setDice(dice5, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice5)
             }
             3 -> {
-                setDice(dice5, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice5)
             }
             4 -> {
-                setDice(dice5, R.drawable.dice4_dark)
+                setDice(dice5, R.drawable.dice4)
                 animate(dice5)
             }
             5 -> {
-                setDice(dice5, R.drawable.dice5_dark)
+                setDice(dice5, R.drawable.dice5)
                 animate(dice5)
             }
             6 -> {
-                setDice(dice5, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice5)
             }
         }
@@ -544,54 +543,54 @@ class DiceRollerDashDark : AppCompatActivity() {
         val randomInt2 = Random.nextInt(6)+1
         when (randomInt1) {
             1 -> {
-                setDice(dice4, R.drawable.dice1_dark)
+                setDice(dice4, R.drawable.dice1)
                 animate(dice4)
             }
             2 -> {
-                setDice(dice4, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice4)
             }
             3 -> {
-                setDice(dice4, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice4)
             }
             4 -> {
-                setDice(dice4, R.drawable.dice4_dark)
+                setDice(dice4, R.drawable.dice4)
                 animate(dice4)
             }
             5 -> {
-                setDice(dice4, R.drawable.dice5_dark)
+                setDice(dice4, R.drawable.dice5)
                 animate(dice4)
             }
             6 -> {
-                setDice(dice4, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice4)
             }
         }
 
         when (randomInt2) {
             1 -> {
-                setDice(dice6, R.drawable.dice1_dark)
+                setDice(dice6, R.drawable.dice1)
                 animate(dice6)
             }
             2 -> {
-                setDice(dice6, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice6)
             }
             3 -> {
-                setDice(dice6, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice6)
             }
             4 -> {
-                setDice(dice6, R.drawable.dice4_dark)
+                setDice(dice6, R.drawable.dice4)
                 animate(dice6)
             }
             5 -> {
-                setDice(dice6, R.drawable.dice5_dark)
+                setDice(dice6, R.drawable.dice5)
                 animate(dice6)
             }
             6 -> {
-                setDice(dice6, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice6)
             }
         }
@@ -604,81 +603,81 @@ class DiceRollerDashDark : AppCompatActivity() {
         val randomInt3 = Random.nextInt(6)+1
         when (randomInt1) {
             1 -> {
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 animate(dice1)
             }
             2 -> {
-                setDice(dice1, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice1)
             }
             3 -> {
-                setDice(dice1, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice1)
             }
             4 -> {
-                setDice(dice1, R.drawable.dice4_dark)
+                setDice(dice1, R.drawable.dice4)
                 animate(dice1)
             }
             5 -> {
-                setDice(dice1, R.drawable.dice5_dark)
+                setDice(dice1, R.drawable.dice5)
                 animate(dice1)
             }
             6 -> {
-                setDice(dice1, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice1)
             }
         }
 
         when (randomInt2) {
             1 -> {
-                setDice(dice5, R.drawable.dice1_dark)
+                setDice(dice5, R.drawable.dice1)
                 animate(dice5)
             }
             2 -> {
-                setDice(dice5, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice5)
             }
             3 -> {
-                setDice(dice5, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice5)
             }
             4 -> {
-                setDice(dice5, R.drawable.dice4_dark)
+                setDice(dice5, R.drawable.dice4)
                 animate(dice5)
             }
             5 -> {
-                setDice(dice5, R.drawable.dice5_dark)
+                setDice(dice5, R.drawable.dice5)
                 animate(dice5)
             }
             6 -> {
-                setDice(dice5, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice5)
             }
         }
 
         when (randomInt3) {
             1 -> {
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
                 animate(dice9)
             }
             2 -> {
-                setDice(dice9, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice9)
             }
             3 -> {
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice9)
             }
             4 -> {
-                setDice(dice9, R.drawable.dice4_dark)
+                setDice(dice9, R.drawable.dice4)
                 animate(dice9)
             }
             5 -> {
-                setDice(dice9, R.drawable.dice5_dark)
+                setDice(dice9, R.drawable.dice5)
                 animate(dice9)
             }
             6 -> {
-                setDice(dice9, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice9)
             }
         }
@@ -692,108 +691,108 @@ class DiceRollerDashDark : AppCompatActivity() {
         val randomInt4 = Random.nextInt(6)+1
         when (randomInt1) {
             1 -> {
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 animate(dice1)
             }
             2 -> {
-                setDice(dice1, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice1)
             }
             3 -> {
-                setDice(dice1, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice1)
             }
             4 -> {
-                setDice(dice1, R.drawable.dice4_dark)
+                setDice(dice1, R.drawable.dice4)
                 animate(dice1)
             }
             5 -> {
-                setDice(dice1, R.drawable.dice5_dark)
+                setDice(dice1, R.drawable.dice5)
                 animate(dice1)
             }
             6 -> {
-                setDice(dice1, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice1)
             }
         }
 
         when (randomInt2) {
             1 -> {
-                setDice(dice3, R.drawable.dice1_dark)
+                setDice(dice3, R.drawable.dice1)
                 animate(dice3)
             }
             2 -> {
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice3)
             }
             3 -> {
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice3)
             }
             4 -> {
-                setDice(dice3, R.drawable.dice4_dark)
+                setDice(dice3, R.drawable.dice4)
                 animate(dice3)
             }
             5 -> {
-                setDice(dice3, R.drawable.dice5_dark)
+                setDice(dice3, R.drawable.dice5)
                 animate(dice3)
             }
             6 -> {
-                setDice(dice3, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice3)
             }
         }
 
         when (randomInt3) {
             1 -> {
-                setDice(dice7, R.drawable.dice1_dark)
+                setDice(dice7, R.drawable.dice1)
                 animate(dice7)
             }
             2 -> {
-                setDice(dice7, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice7)
             }
             3 -> {
-                setDice(dice7, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice7)
             }
             4 -> {
-                setDice(dice7, R.drawable.dice4_dark)
+                setDice(dice7, R.drawable.dice4)
                 animate(dice7)
             }
             5 -> {
-                setDice(dice7, R.drawable.dice5_dark)
+                setDice(dice7, R.drawable.dice5)
                 animate(dice7)
             }
             6 -> {
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice7)
             }
         }
 
         when (randomInt4) {
             1 -> {
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
                 animate(dice9)
             }
             2 -> {
-                setDice(dice9, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice9)
             }
             3 -> {
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice9)
             }
             4 -> {
-                setDice(dice9, R.drawable.dice4_dark)
+                setDice(dice9, R.drawable.dice4)
                 animate(dice9)
             }
             5 -> {
-                setDice(dice9, R.drawable.dice5_dark)
+                setDice(dice9, R.drawable.dice5)
                 animate(dice9)
             }
             6 -> {
-                setDice(dice9, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice9)
             }
         }
@@ -808,135 +807,135 @@ class DiceRollerDashDark : AppCompatActivity() {
         val randomInt5 = Random.nextInt(6)+1
         when (randomInt1) {
             1 -> {
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 animate(dice1)
             }
             2 -> {
-                setDice(dice1, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice1)
             }
             3 -> {
-                setDice(dice1, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice1)
             }
             4 -> {
-                setDice(dice1, R.drawable.dice4_dark)
+                setDice(dice1, R.drawable.dice4)
                 animate(dice1)
             }
             5 -> {
-                setDice(dice1, R.drawable.dice5_dark)
+                setDice(dice1, R.drawable.dice5)
                 animate(dice1)
             }
             6 -> {
-                setDice(dice1, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice1)
             }
         }
 
         when (randomInt2) {
             1 -> {
-                setDice(dice3, R.drawable.dice1_dark)
+                setDice(dice3, R.drawable.dice1)
                 animate(dice3)
             }
             2 -> {
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice3)
             }
             3 -> {
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice3)
             }
             4 -> {
-                setDice(dice3, R.drawable.dice4_dark)
+                setDice(dice3, R.drawable.dice4)
                 animate(dice3)
             }
             5 -> {
-                setDice(dice3, R.drawable.dice5_dark)
+                setDice(dice3, R.drawable.dice5)
                 animate(dice3)
             }
             6 -> {
-                setDice(dice3, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice3)
             }
         }
 
         when (randomInt3) {
             1 -> {
-                setDice(dice5, R.drawable.dice1_dark)
+                setDice(dice5, R.drawable.dice1)
                 animate(dice5)
             }
             2 -> {
-                setDice(dice5, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice5)
             }
             3 -> {
-                setDice(dice5, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice5)
             }
             4 -> {
-                setDice(dice5, R.drawable.dice4_dark)
+                setDice(dice5, R.drawable.dice4)
                 animate(dice5)
             }
             5 -> {
-                setDice(dice5, R.drawable.dice5_dark)
+                setDice(dice5, R.drawable.dice5)
                 animate(dice5)
             }
             6 -> {
-                setDice(dice5, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice5)
             }
         }
 
         when (randomInt4) {
             1 -> {
-                setDice(dice7, R.drawable.dice1_dark)
+                setDice(dice7, R.drawable.dice1)
                 animate(dice7)
             }
             2 -> {
-                setDice(dice7, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice7)
             }
             3 -> {
-                setDice(dice7, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice7)
             }
             4 -> {
-                setDice(dice7, R.drawable.dice4_dark)
+                setDice(dice7, R.drawable.dice4)
                 animate(dice7)
             }
             5 -> {
-                setDice(dice7, R.drawable.dice5_dark)
+                setDice(dice7, R.drawable.dice5)
                 animate(dice7)
             }
             6 -> {
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice7)
             }
         }
 
         when (randomInt5) {
             1 -> {
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
                 animate(dice9)
             }
             2 -> {
-                setDice(dice9, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice9)
             }
             3 -> {
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice9)
             }
             4 -> {
-                setDice(dice9, R.drawable.dice4_dark)
+                setDice(dice9, R.drawable.dice4)
                 animate(dice9)
             }
             5 -> {
-                setDice(dice9, R.drawable.dice5_dark)
+                setDice(dice9, R.drawable.dice5)
                 animate(dice9)
             }
             6 -> {
-                setDice(dice9, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice9)
             }
         }
@@ -952,162 +951,162 @@ class DiceRollerDashDark : AppCompatActivity() {
         val randomInt6 = Random.nextInt(6)+1
         when (randomInt1) {
             1 -> {
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 animate(dice1)
             }
             2 -> {
-                setDice(dice1, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice1)
             }
             3 -> {
-                setDice(dice1, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice1)
             }
             4 -> {
-                setDice(dice1, R.drawable.dice4_dark)
+                setDice(dice1, R.drawable.dice4)
                 animate(dice1)
             }
             5 -> {
-                setDice(dice1, R.drawable.dice5_dark)
+                setDice(dice1, R.drawable.dice5)
                 animate(dice1)
             }
             6 -> {
-                setDice(dice1, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice1)
             }
         }
 
         when (randomInt2) {
             1 -> {
-                setDice(dice3, R.drawable.dice1_dark)
+                setDice(dice3, R.drawable.dice1)
                 animate(dice3)
             }
             2 -> {
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice3)
             }
             3 -> {
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice3)
             }
             4 -> {
-                setDice(dice3, R.drawable.dice4_dark)
+                setDice(dice3, R.drawable.dice4)
                 animate(dice3)
             }
             5 -> {
-                setDice(dice3, R.drawable.dice5_dark)
+                setDice(dice3, R.drawable.dice5)
                 animate(dice3)
             }
             6 -> {
-                setDice(dice3, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice3)
             }
         }
 
         when (randomInt3) {
             1 -> {
-                setDice(dice4, R.drawable.dice1_dark)
+                setDice(dice4, R.drawable.dice1)
                 animate(dice4)
             }
             2 -> {
-                setDice(dice4, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice4)
             }
             3 -> {
-                setDice(dice4, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice4)
             }
             4 -> {
-                setDice(dice4, R.drawable.dice4_dark)
+                setDice(dice4, R.drawable.dice4)
                 animate(dice4)
             }
             5 -> {
-                setDice(dice4, R.drawable.dice5_dark)
+                setDice(dice4, R.drawable.dice5)
                 animate(dice4)
             }
             6 -> {
-                setDice(dice4, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice4)
             }
         }
 
         when (randomInt4) {
             1 -> {
-                setDice(dice6, R.drawable.dice1_dark)
+                setDice(dice6, R.drawable.dice1)
                 animate(dice6)
             }
             2 -> {
-                setDice(dice6, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice6)
             }
             3 -> {
-                setDice(dice6, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice6)
             }
             4 -> {
-                setDice(dice6, R.drawable.dice4_dark)
+                setDice(dice6, R.drawable.dice4)
                 animate(dice6)
             }
             5 -> {
-                setDice(dice6, R.drawable.dice5_dark)
+                setDice(dice6, R.drawable.dice5)
                 animate(dice6)
             }
             6 -> {
-                setDice(dice6, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice6)
             }
         }
 
         when (randomInt5) {
             1 -> {
-                setDice(dice7, R.drawable.dice1_dark)
+                setDice(dice7, R.drawable.dice1)
                 animate(dice7)
             }
             2 -> {
-                setDice(dice7, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice7)
             }
             3 -> {
-                setDice(dice7, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice7)
             }
             4 -> {
-                setDice(dice7, R.drawable.dice4_dark)
+                setDice(dice7, R.drawable.dice4)
                 animate(dice7)
             }
             5 -> {
-                setDice(dice7, R.drawable.dice5_dark)
+                setDice(dice7, R.drawable.dice5)
                 animate(dice7)
             }
             6 -> {
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice7)
             }
         }
 
         when (randomInt6) {
             1 -> {
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
                 animate(dice9)
             }
             2 -> {
-                setDice(dice9, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice9)
             }
             3 -> {
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice9)
             }
             4 -> {
-                setDice(dice9, R.drawable.dice4_dark)
+                setDice(dice9, R.drawable.dice4)
                 animate(dice9)
             }
             5 -> {
-                setDice(dice9, R.drawable.dice5_dark)
+                setDice(dice9, R.drawable.dice5)
                 animate(dice9)
             }
             6 -> {
-                setDice(dice9, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice9)
             }
         }
@@ -1124,189 +1123,189 @@ class DiceRollerDashDark : AppCompatActivity() {
         val randomInt7 = Random.nextInt(6)+1
         when (randomInt1) {
             1 -> {
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 animate(dice1)
             }
             2 -> {
-                setDice(dice1, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice1)
             }
             3 -> {
-                setDice(dice1, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice1)
             }
             4 -> {
-                setDice(dice1, R.drawable.dice4_dark)
+                setDice(dice1, R.drawable.dice4)
                 animate(dice1)
             }
             5 -> {
-                setDice(dice1, R.drawable.dice5_dark)
+                setDice(dice1, R.drawable.dice5)
                 animate(dice1)
             }
             6 -> {
-                setDice(dice1, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice1)
             }
         }
 
         when (randomInt2) {
             1 -> {
-                setDice(dice3, R.drawable.dice1_dark)
+                setDice(dice3, R.drawable.dice1)
                 animate(dice3)
             }
             2 -> {
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice3)
             }
             3 -> {
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice3)
             }
             4 -> {
-                setDice(dice3, R.drawable.dice4_dark)
+                setDice(dice3, R.drawable.dice4)
                 animate(dice3)
             }
             5 -> {
-                setDice(dice3, R.drawable.dice5_dark)
+                setDice(dice3, R.drawable.dice5)
                 animate(dice3)
             }
             6 -> {
-                setDice(dice3, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice3)
             }
         }
 
         when (randomInt3) {
             1 -> {
-                setDice(dice4, R.drawable.dice1_dark)
+                setDice(dice4, R.drawable.dice1)
                 animate(dice4)
             }
             2 -> {
-                setDice(dice4, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice4)
             }
             3 -> {
-                setDice(dice4, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice4)
             }
             4 -> {
-                setDice(dice4, R.drawable.dice4_dark)
+                setDice(dice4, R.drawable.dice4)
                 animate(dice4)
             }
             5 -> {
-                setDice(dice4, R.drawable.dice5_dark)
+                setDice(dice4, R.drawable.dice5)
                 animate(dice4)
             }
             6 -> {
-                setDice(dice4, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice4)
             }
         }
 
         when (randomInt4) {
             1 -> {
-                setDice(dice5, R.drawable.dice1_dark)
+                setDice(dice5, R.drawable.dice1)
                 animate(dice5)
             }
             2 -> {
-                setDice(dice5, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice5)
             }
             3 -> {
-                setDice(dice5, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice5)
             }
             4 -> {
-                setDice(dice5, R.drawable.dice4_dark)
+                setDice(dice5, R.drawable.dice4)
                 animate(dice5)
             }
             5 -> {
-                setDice(dice5, R.drawable.dice5_dark)
+                setDice(dice5, R.drawable.dice5)
                 animate(dice5)
             }
             6 -> {
-                setDice(dice5, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice5)
             }
         }
 
         when (randomInt5) {
             1 -> {
-                setDice(dice6, R.drawable.dice1_dark)
+                setDice(dice6, R.drawable.dice1)
                 animate(dice6)
             }
             2 -> {
-                setDice(dice6, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice6)
             }
             3 -> {
-                setDice(dice6, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice6)
             }
             4 -> {
-                setDice(dice6, R.drawable.dice4_dark)
+                setDice(dice6, R.drawable.dice4)
                 animate(dice6)
             }
             5 -> {
-                setDice(dice6, R.drawable.dice5_dark)
+                setDice(dice6, R.drawable.dice5)
                 animate(dice6)
             }
             6 -> {
-                setDice(dice6, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice6)
             }
         }
 
         when (randomInt6) {
             1 -> {
-                setDice(dice7, R.drawable.dice1_dark)
+                setDice(dice7, R.drawable.dice1)
                 animate(dice7)
             }
             2 -> {
-                setDice(dice7, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice7)
             }
             3 -> {
-                setDice(dice7, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice7)
             }
             4 -> {
-                setDice(dice7, R.drawable.dice4_dark)
+                setDice(dice7, R.drawable.dice4)
                 animate(dice7)
             }
             5 -> {
-                setDice(dice7, R.drawable.dice5_dark)
+                setDice(dice7, R.drawable.dice5)
                 animate(dice7)
             }
             6 -> {
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice7)
             }
         }
 
         when (randomInt7) {
             1 -> {
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
                 animate(dice9)
             }
             2 -> {
-                setDice(dice9, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice9)
             }
             3 -> {
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice9)
             }
             4 -> {
-                setDice(dice9, R.drawable.dice4_dark)
+                setDice(dice9, R.drawable.dice4)
                 animate(dice9)
             }
             5 -> {
-                setDice(dice9, R.drawable.dice5_dark)
+                setDice(dice9, R.drawable.dice5)
                 animate(dice9)
             }
             6 -> {
-                setDice(dice9, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice9)
             }
         }
@@ -1324,216 +1323,216 @@ class DiceRollerDashDark : AppCompatActivity() {
         val randomInt8 = Random.nextInt(6)+1
         when (randomInt1) {
             1 -> {
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 animate(dice1)
             }
             2 -> {
-                setDice(dice1, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice1)
             }
             3 -> {
-                setDice(dice1, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice1)
             }
             4 -> {
-                setDice(dice1, R.drawable.dice4_dark)
+                setDice(dice1, R.drawable.dice4)
                 animate(dice1)
             }
             5 -> {
-                setDice(dice1, R.drawable.dice5_dark)
+                setDice(dice1, R.drawable.dice5)
                 animate(dice1)
             }
             6 -> {
-                setDice(dice1, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice1)
             }
         }
 
         when (randomInt2) {
             1 -> {
-                setDice(dice2, R.drawable.dice1_dark)
+                setDice(dice2, R.drawable.dice1)
                 animate(dice2)
             }
             2 -> {
-                setDice(dice2, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice2)
             }
             3 -> {
-                setDice(dice2, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice2)
             }
             4 -> {
-                setDice(dice2, R.drawable.dice4_dark)
+                setDice(dice2, R.drawable.dice4)
                 animate(dice2)
             }
             5 -> {
-                setDice(dice2, R.drawable.dice5_dark)
+                setDice(dice2, R.drawable.dice5)
                 animate(dice2)
             }
             6 -> {
-                setDice(dice2, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice2)
             }
         }
 
         when (randomInt3) {
             1 -> {
-                setDice(dice3, R.drawable.dice1_dark)
+                setDice(dice3, R.drawable.dice1)
                 animate(dice3)
             }
             2 -> {
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice3)
             }
             3 -> {
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice3)
             }
             4 -> {
-                setDice(dice3, R.drawable.dice4_dark)
+                setDice(dice3, R.drawable.dice4)
                 animate(dice3)
             }
             5 -> {
-                setDice(dice3, R.drawable.dice5_dark)
+                setDice(dice3, R.drawable.dice5)
                 animate(dice3)
             }
             6 -> {
-                setDice(dice3, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice3)
             }
         }
 
         when (randomInt4) {
             1 -> {
-                setDice(dice4, R.drawable.dice1_dark)
+                setDice(dice4, R.drawable.dice1)
                 animate(dice4)
             }
             2 -> {
-                setDice(dice4, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice4)
             }
             3 -> {
-                setDice(dice4, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice4)
             }
             4 -> {
-                setDice(dice4, R.drawable.dice4_dark)
+                setDice(dice4, R.drawable.dice4)
                 animate(dice4)
             }
             5 -> {
-                setDice(dice4, R.drawable.dice5_dark)
+                setDice(dice4, R.drawable.dice5)
                 animate(dice4)
             }
             6 -> {
-                setDice(dice4, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice4)
             }
         }
 
         when (randomInt5) {
             1 -> {
-                setDice(dice6, R.drawable.dice1_dark)
+                setDice(dice6, R.drawable.dice1)
                 animate(dice6)
             }
             2 -> {
-                setDice(dice6, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice6)
             }
             3 -> {
-                setDice(dice6, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice6)
             }
             4 -> {
-                setDice(dice6, R.drawable.dice4_dark)
+                setDice(dice6, R.drawable.dice4)
                 animate(dice6)
             }
             5 -> {
-                setDice(dice6, R.drawable.dice5_dark)
+                setDice(dice6, R.drawable.dice5)
                 animate(dice6)
             }
             6 -> {
-                setDice(dice6, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice6)
             }
         }
 
         when (randomInt6) {
             1 -> {
-                setDice(dice7, R.drawable.dice1_dark)
+                setDice(dice7, R.drawable.dice1)
                 animate(dice7)
             }
             2 -> {
-                setDice(dice7, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice7)
             }
             3 -> {
-                setDice(dice7, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice7)
             }
             4 -> {
-                setDice(dice7, R.drawable.dice4_dark)
+                setDice(dice7, R.drawable.dice4)
                 animate(dice7)
             }
             5 -> {
-                setDice(dice7, R.drawable.dice5_dark)
+                setDice(dice7, R.drawable.dice5)
                 animate(dice7)
             }
             6 -> {
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice7)
             }
         }
 
         when (randomInt7) {
             1 -> {
-                setDice(dice8, R.drawable.dice1_dark)
+                setDice(dice8, R.drawable.dice1)
                 animate(dice8)
             }
             2 -> {
-                setDice(dice8, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice8)
             }
             3 -> {
-                setDice(dice8, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice8)
             }
             4 -> {
-                setDice(dice8, R.drawable.dice4_dark)
+                setDice(dice8, R.drawable.dice4)
                 animate(dice8)
             }
             5 -> {
-                setDice(dice8, R.drawable.dice5_dark)
+                setDice(dice8, R.drawable.dice5)
                 animate(dice8)
             }
             6 -> {
-                setDice(dice8, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice8)
             }
         }
 
         when (randomInt8) {
             1 -> {
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
                 animate(dice9)
             }
             2 -> {
-                setDice(dice9, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice9)
             }
             3 -> {
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice9)
             }
             4 -> {
-                setDice(dice9, R.drawable.dice4_dark)
+                setDice(dice9, R.drawable.dice4)
                 animate(dice9)
             }
             5 -> {
-                setDice(dice9, R.drawable.dice5_dark)
+                setDice(dice9, R.drawable.dice5)
                 animate(dice9)
             }
             6 -> {
-                setDice(dice9, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice9)
             }
         }
@@ -1552,243 +1551,243 @@ class DiceRollerDashDark : AppCompatActivity() {
         val randomInt9 = Random.nextInt(6)+1
         when (randomInt1) {
             1 -> {
-                setDice(dice1, R.drawable.dice1_dark)
+                setDice(dice1, R.drawable.dice1)
                 animate(dice1)
             }
             2 -> {
-                setDice(dice1, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice1)
             }
             3 -> {
-                setDice(dice1, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice1)
             }
             4 -> {
-                setDice(dice1, R.drawable.dice4_dark)
+                setDice(dice1, R.drawable.dice4)
                 animate(dice1)
             }
             5 -> {
-                setDice(dice1, R.drawable.dice5_dark)
+                setDice(dice1, R.drawable.dice5)
                 animate(dice1)
             }
             6 -> {
-                setDice(dice1, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice1, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice1)
             }
         }
 
         when (randomInt2) {
             1 -> {
-                setDice(dice2, R.drawable.dice1_dark)
+                setDice(dice2, R.drawable.dice1)
                 animate(dice2)
             }
             2 -> {
-                setDice(dice2, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice2)
             }
             3 -> {
-                setDice(dice2, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice2)
             }
             4 -> {
-                setDice(dice2, R.drawable.dice4_dark)
+                setDice(dice2, R.drawable.dice4)
                 animate(dice2)
             }
             5 -> {
-                setDice(dice2, R.drawable.dice5_dark)
+                setDice(dice2, R.drawable.dice5)
                 animate(dice2)
             }
             6 -> {
-                setDice(dice2, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice2, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice2)
             }
         }
 
         when (randomInt3) {
             1 -> {
-                setDice(dice3, R.drawable.dice1_dark)
+                setDice(dice3, R.drawable.dice1)
                 animate(dice3)
             }
             2 -> {
-                setDice(dice3, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice3)
             }
             3 -> {
-                setDice(dice3, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice3)
             }
             4 -> {
-                setDice(dice3, R.drawable.dice4_dark)
+                setDice(dice3, R.drawable.dice4)
                 animate(dice3)
             }
             5 -> {
-                setDice(dice3, R.drawable.dice5_dark)
+                setDice(dice3, R.drawable.dice5)
                 animate(dice3)
             }
             6 -> {
-                setDice(dice3, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice3, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice3)
             }
         }
 
         when (randomInt4) {
             1 -> {
-                setDice(dice4, R.drawable.dice1_dark)
+                setDice(dice4, R.drawable.dice1)
                 animate(dice4)
             }
             2 -> {
-                setDice(dice4, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice4)
             }
             3 -> {
-                setDice(dice4, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice4)
             }
             4 -> {
-                setDice(dice4, R.drawable.dice4_dark)
+                setDice(dice4, R.drawable.dice4)
                 animate(dice4)
             }
             5 -> {
-                setDice(dice4, R.drawable.dice5_dark)
+                setDice(dice4, R.drawable.dice5)
                 animate(dice4)
             }
             6 -> {
-                setDice(dice4, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice4, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice4)
             }
         }
 
         when (randomInt5) {
             1 -> {
-                setDice(dice5, R.drawable.dice1_dark)
+                setDice(dice5, R.drawable.dice1)
                 animate(dice5)
             }
             2 -> {
-                setDice(dice5, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice5)
             }
             3 -> {
-                setDice(dice5, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice5)
             }
             4 -> {
-                setDice(dice5, R.drawable.dice4_dark)
+                setDice(dice5, R.drawable.dice4)
                 animate(dice5)
             }
             5 -> {
-                setDice(dice5, R.drawable.dice5_dark)
+                setDice(dice5, R.drawable.dice5)
                 animate(dice5)
             }
             6 -> {
-                setDice(dice5, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice5, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice5)
             }
         }
 
         when (randomInt6) {
             1 -> {
-                setDice(dice6, R.drawable.dice1_dark)
+                setDice(dice6, R.drawable.dice1)
                 animate(dice6)
             }
             2 -> {
-                setDice(dice6, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice6)
             }
             3 -> {
-                setDice(dice6, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice6)
             }
             4 -> {
-                setDice(dice6, R.drawable.dice4_dark)
+                setDice(dice6, R.drawable.dice4)
                 animate(dice6)
             }
             5 -> {
-                setDice(dice6, R.drawable.dice5_dark)
+                setDice(dice6, R.drawable.dice5)
                 animate(dice6)
             }
             6 -> {
-                setDice(dice6, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice6, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice6)
             }
         }
 
         when (randomInt7) {
             1 -> {
-                setDice(dice7, R.drawable.dice1_dark)
+                setDice(dice7, R.drawable.dice1)
                 animate(dice7)
             }
             2 -> {
-                setDice(dice7, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice7)
             }
             3 -> {
-                setDice(dice7, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice7)
             }
             4 -> {
-                setDice(dice7, R.drawable.dice4_dark)
+                setDice(dice7, R.drawable.dice4)
                 animate(dice7)
             }
             5 -> {
-                setDice(dice7, R.drawable.dice5_dark)
+                setDice(dice7, R.drawable.dice5)
                 animate(dice7)
             }
             6 -> {
-                setDice(dice7, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice7, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice7)
             }
         }
 
         when (randomInt8) {
             1 -> {
-                setDice(dice8, R.drawable.dice1_dark)
+                setDice(dice8, R.drawable.dice1)
                 animate(dice8)
             }
             2 -> {
-                setDice(dice8, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice8)
             }
             3 -> {
-                setDice(dice8, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice8)
             }
             4 -> {
-                setDice(dice8, R.drawable.dice4_dark)
+                setDice(dice8, R.drawable.dice4)
                 animate(dice8)
             }
             5 -> {
-                setDice(dice8, R.drawable.dice5_dark)
+                setDice(dice8, R.drawable.dice5)
                 animate(dice8)
             }
             6 -> {
-                setDice(dice8, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice8, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice8)
             }
         }
 
         when (randomInt9) {
             1 -> {
-                setDice(dice9, R.drawable.dice1_dark)
+                setDice(dice9, R.drawable.dice1)
                 animate(dice9)
             }
             2 -> {
-                setDice(dice9, arrayOf(R.drawable.dice2_1_dark, R.drawable.dice2_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice2_1, R.drawable.dice2_2).random())
                 animate(dice9)
             }
             3 -> {
-                setDice(dice9, arrayOf(R.drawable.dice3_1_dark, R.drawable.dice3_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice3_1, R.drawable.dice3_2).random())
                 animate(dice9)
             }
             4 -> {
-                setDice(dice9, R.drawable.dice4_dark)
+                setDice(dice9, R.drawable.dice4)
                 animate(dice9)
             }
             5 -> {
-                setDice(dice9, R.drawable.dice5_dark)
+                setDice(dice9, R.drawable.dice5)
                 animate(dice9)
             }
             6 -> {
-                setDice(dice9, arrayOf(R.drawable.dice6_1_dark, R.drawable.dice6_2_dark).random())
+                setDice(dice9, arrayOf(R.drawable.dice6_1, R.drawable.dice6_2).random())
                 animate(dice9)
             }
         }
