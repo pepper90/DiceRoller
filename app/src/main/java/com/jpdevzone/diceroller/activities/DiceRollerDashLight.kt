@@ -1,4 +1,4 @@
-package com.jpdevzone.diceroller
+package com.jpdevzone.diceroller.activities
 
 import android.content.Context
 import android.content.Intent
@@ -22,8 +22,8 @@ import kotlin.random.Random
 import android.media.AudioManager
 import android.media.AudioAttributes
 import android.os.Build
-
-
+import com.jpdevzone.diceroller.Constants
+import com.jpdevzone.diceroller.R
 
 
 class DiceRollerDashLight : AppCompatActivity() {
@@ -1848,7 +1848,7 @@ class DiceRollerDashLight : AppCompatActivity() {
         counter++
         if (counter==1) {
             saveData()
-            Toasty.custom(this, R.string.toast,R.drawable.ic_exit,R.color.toast,
+            Toasty.custom(this, R.string.toast, R.drawable.ic_exit, R.color.toast,
                 Toast.LENGTH_LONG,true, true).show()
         } else {
             finish()

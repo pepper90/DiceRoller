@@ -1,4 +1,4 @@
-package com.jpdevzone.diceroller
+package com.jpdevzone.diceroller.activities
 
 import android.content.Context
 import android.content.Intent
@@ -19,6 +19,8 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.jpdevzone.diceroller.Constants
+import com.jpdevzone.diceroller.R
 import com.jpdevzone.diceroller.databinding.DiceRollerDashDarkBinding
 import es.dmoral.toasty.Toasty
 import kotlin.random.Random
@@ -138,7 +140,7 @@ class DiceRollerDashDark : AppCompatActivity() {
         }
 
         rollSound = soundPool.load(this, R.raw.roll_sound, 1)
-        Constants.isClicked= false
+        Constants.isClicked = false
 
         muteButton.setOnClickListener {
             when (Constants.isClicked) {
@@ -1846,7 +1848,7 @@ class DiceRollerDashDark : AppCompatActivity() {
         counter++
         if (counter==1) {
             saveData()
-            Toasty.custom(this, R.string.toast,R.drawable.ic_exit,R.color.toast,
+            Toasty.custom(this, R.string.toast, R.drawable.ic_exit, R.color.toast,
                 Toast.LENGTH_LONG,true, true).show()
         } else {
             finish()

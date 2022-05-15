@@ -15,8 +15,11 @@
         <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/drawable/bg_btn_roll.xml" value="0.14635416666666667" />
         <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/drawable/bg_btn_roll_dark.xml" value="0.22179487179487178" />
         <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/drawable/bg_btn_select_theme_dark.xml" value="0.22179487179487178" />
+        <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/drawable/bg_btn_unmute.xml" value="0.1905" />
         <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/drawable/ic_dice_one.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/drawable/ic_exit.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/layout/activity_fragment_container.xml" value="0.16486486486486487" />
+        <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/layout/dice_roller_dash.xml" value="0.536" />
         <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/layout/dice_roller_dash_dark.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/DiceRoller/app/src/main/res/layout/dice_roller_dash_light.xml" value="0.12" />
