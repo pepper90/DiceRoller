@@ -1,4 +1,4 @@
-package com.jpdevzone.diceroller
+package com.jpdevzone.diceroller.util
 
 object Constants {
     var isClicked = false
