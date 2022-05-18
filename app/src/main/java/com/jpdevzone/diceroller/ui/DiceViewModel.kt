@@ -1,22 +1,26 @@
 package com.jpdevzone.diceroller.ui
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.jpdevzone.diceroller.util.AdCounter
 
-class DiceViewModel: ViewModel() {
+class DiceViewModel(app: Application): AndroidViewModel(app) {
     private val _diceOnScreen = MutableLiveData<Int>()
     val diceOnScreen: LiveData<Int> = _diceOnScreen
 
     fun increaseDice() {
         _diceOnScreen.value = (_diceOnScreen.value?.plus(1))?.coerceAtMost(9)
         _resultOnScreen.value = 0
+        increaseAdCounter()
     }
 
     fun decreaseDice() {
         _diceOnScreen.value = (_diceOnScreen.value?.minus(1))?.coerceAtLeast(1)
         _resultOnScreen.value = 0
+        increaseAdCounter()
     }
 
 
@@ -148,8 +152,18 @@ class DiceViewModel: ViewModel() {
         }
     }
 
+    private val _adCounter = MutableLiveData<Int>()
+    val adCounter: LiveData<Int>
+    get() = _adCounter
+
+    private fun increaseAdCounter() {
+        _adCounter.value = _adCounter.value?.plus(1)
+        Log.d("Counter", _adCounter.value.toString())
+    }
+
     init {
         initialValues()
+        _adCounter.value = AdCounter.getAdCounter(app)
     }
 
     private fun initialValues() {

@@ -1,13 +1,14 @@
 package com.jpdevzone.diceroller.ui
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class DiceViewModelFactory() : ViewModelProvider.Factory {
+class DiceViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DiceViewModel::class.java)) {
-            return DiceViewModel() as T
+            return DiceViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
