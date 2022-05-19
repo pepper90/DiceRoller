@@ -20,7 +20,7 @@
         android:paddingStart="@dimen/_15sdp"
         android:paddingLeft="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
-        android:paddingRight="@dimen/_15sdp">
+        android:paddingRight="@dimen/_15sdp" >
 
         <LinearLayout
             android:id="@+id/controls"
@@ -37,182 +37,158 @@
 
             <ImageView
                 android:id="@+id/btnMinus"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:background="?attr/colorPrimary"
-                android:clickable="true"
                 android:enabled="@{vm.diceOnScreen &gt; 1 ? true : false}"
-                android:focusable="true"
                 android:onClick="@{() -> vm.decreaseDice()}"
-                android:src="@drawable/bg_btn_minus" />
+                android:src="@drawable/bg_btn_minus"
+                style="@style/PlusMinusButton" />
 
             <TextView
                 android:id="@+id/diceNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@{vm.diceOnScreen.toString()}"
                 android:textColor="?attr/colorOnPrimary"
-                android:textSize="@dimen/_30ssp"
-                android:textStyle="bold"
-                tools:text="1" />
+                tools:text="1"
+                style="@style/DiceNumber" />
 
             <ImageView
                 android:id="@+id/btnPlus"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:background="?attr/colorPrimary"
-                android:clickable="true"
                 android:enabled="@{vm.diceOnScreen &lt; 9 ? true : false}"
-                android:focusable="true"
                 android:onClick="@{() -> vm.increaseDice()}"
-                android:src="@drawable/bg_btn_plus"/>
+                android:src="@drawable/bg_btn_plus"
+                style="@style/PlusMinusButton"/>
         </LinearLayout>
 
         <ImageView
             android:id="@+id/dice1"
             setDiceOne="@{vm.diceOnScreen}"
             setImage="@{vm.diceOne}"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
             app:layout_constraintBottom_toTopOf="@id/dice4"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/controls"
-            tools:src="@drawable/dice1"/>
+            tools:src="@drawable/dice1"
+            style="@style/Dice" />
 
         <ImageView
             android:id="@+id/dice2"
             setDiceTwo="@{vm.diceOnScreen}"
             setImage="@{vm.diceTwo}"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
             app:layout_constraintBottom_toTopOf="@id/dice5"
             app:layout_constraintEnd_toStartOf="@+id/dice3"
             app:layout_constraintLeft_toRightOf="@id/dice1"
             app:layout_constraintRight_toLeftOf="@id/dice3"
             app:layout_constraintStart_toEndOf="@+id/dice1"
             app:layout_constraintTop_toBottomOf="@id/controls"
-            tools:src="@drawable/dice6_2" />
+            tools:src="@drawable/dice6_2"
+            style="@style/Dice" />
 
         <ImageView
             android:id="@+id/dice3"
             setDiceThree="@{vm.diceOnScreen}"
             setImage="@{vm.diceThree}"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
             app:layout_constraintBottom_toTopOf="@id/dice6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/controls"
-            tools:src="@drawable/dice3_1" />
+            tools:src="@drawable/dice3_1"
+            style="@style/Dice" />
 
         <ImageView
             android:id="@+id/dice4"
             setDiceFour="@{vm.diceOnScreen}"
             setImage="@{vm.diceFour}"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
             app:layout_constraintBottom_toTopOf="@id/dice7"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dice1"
-            tools:src="@drawable/dice4" />
+            tools:src="@drawable/dice4"
+            style="@style/Dice" />
 
         <ImageView
             android:id="@+id/dice5"
             setDiceFive="@{vm.diceOnScreen}"
             setImage="@{vm.diceFive}"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
             app:layout_constraintBottom_toTopOf="@id/dice8"
             app:layout_constraintEnd_toStartOf="@+id/dice6"
             app:layout_constraintLeft_toRightOf="@id/dice4"
             app:layout_constraintRight_toLeftOf="@id/dice6"
             app:layout_constraintStart_toEndOf="@+id/dice4"
             app:layout_constraintTop_toBottomOf="@id/dice2"
-            tools:src="@drawable/dice5" />
+            tools:src="@drawable/dice5"
+            style="@style/Dice" />
 
         <ImageView
             android:id="@+id/dice6"
             setDiceSix="@{vm.diceOnScreen}"
             setImage="@{vm.diceSix}"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
             app:layout_constraintBottom_toTopOf="@id/dice9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dice3"
-            tools:src="@drawable/dice6_1"/>
+            tools:src="@drawable/dice6_1"
+            style="@style/Dice" />
 
         <ImageView
             android:id="@+id/dice7"
             setDiceSeven="@{vm.diceOnScreen}"
             setImage="@{vm.diceSeven}"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
             app:layout_constraintBottom_toTopOf="@id/diceSum"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dice4"
-            tools:src="@drawable/dice1" />
+            tools:src="@drawable/dice1"
+            style="@style/Dice" />
 
         <ImageView
             android:id="@+id/dice8"
             setDiceEight="@{vm.diceOnScreen}"
             setImage="@{vm.diceEight}"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
             app:layout_constraintBottom_toTopOf="@id/diceSum"
             app:layout_constraintEnd_toStartOf="@+id/dice9"
             app:layout_constraintLeft_toRightOf="@id/dice7"
             app:layout_constraintRight_toLeftOf="@id/dice9"
             app:layout_constraintStart_toEndOf="@+id/dice7"
             app:layout_constraintTop_toBottomOf="@id/dice5"
-            tools:src="@drawable/dice2_1" />
+            tools:src="@drawable/dice2_1"
+            style="@style/Dice" />
 
         <ImageView
             android:id="@+id/dice9"
             setDiceNine="@{vm.diceOnScreen}"
             setImage="@{vm.diceNine}"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
             app:layout_constraintBottom_toTopOf="@id/diceSum"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dice6"
-            tools:src="@drawable/dice3_1" />
+            tools:src="@drawable/dice3_1"
+            style="@style/Dice" />
 
         <TextView
             android:id="@+id/diceSum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@{vm.resultOnScreen.toString()}"
             android:textColor="?attr/colorOnPrimary"
-            android:textSize="@dimen/_40ssp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/btnRoll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dice8"
-            tools:text="@string/diceSum" />
+            tools:text="@string/diceSum"
+            style="@style/DiceSum" />
 
         <ImageView
             android:id="@+id/btnRoll"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_70sdp"
             android:background="?attr/colorPrimary"
-            android:clickable="true"
-            android:focusable="true"
             android:onClick="@{() -> vm.rollDices()}"
             android:src="@drawable/bg_btn_roll"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/diceSum"/>
+            app:layout_constraintTop_toBottomOf="@id/diceSum"
+            style="@style/RollButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
