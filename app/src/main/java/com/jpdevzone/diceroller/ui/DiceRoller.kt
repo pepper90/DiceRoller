@@ -1,5 +1,6 @@
 package com.jpdevzone.diceroller.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.jpdevzone.diceroller.R
 import com.jpdevzone.diceroller.databinding.DiceRollerBinding
 import com.jpdevzone.diceroller.util.AdCounter
@@ -38,6 +40,10 @@ class DiceRoller : AppCompatActivity() {
 
         MobileAds.initialize(this)
         loadAd()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            inAppReview()
+        }
     }
 
     private fun showAd() {
@@ -81,6 +87,18 @@ class DiceRoller : AppCompatActivity() {
 
     private fun saveData() {
         AdCounter.setAdCounter(this, viewModel.adCounter.value!!)
+    }
+
+    private fun inAppReview() {
+        val reviewManager = ReviewManagerFactory.create(this)
+        val requestReviewFlow = reviewManager.requestReviewFlow()
+        requestReviewFlow.addOnCompleteListener { request ->
+            if (request.isSuccessful) {
+                val reviewInfo = request.result
+                val flow = reviewManager.launchReviewFlow(this, reviewInfo)
+                flow.addOnCompleteListener {}
+            }
+        }
     }
 
 
