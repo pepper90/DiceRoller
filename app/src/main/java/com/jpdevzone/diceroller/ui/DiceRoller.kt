@@ -1,9 +1,7 @@
 package com.jpdevzone.diceroller.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +12,6 @@ import com.google.android.play.core.review.ReviewManagerFactory
 import com.jpdevzone.diceroller.R
 import com.jpdevzone.diceroller.databinding.DiceRollerBinding
 import com.jpdevzone.diceroller.util.AdCounter
-import es.dmoral.toasty.Toasty
 
 
 class DiceRoller : AppCompatActivity() {
@@ -22,7 +19,6 @@ class DiceRoller : AppCompatActivity() {
     private lateinit var viewModel: DiceViewModel
 
     private var mInterstitialAd: InterstitialAd? = null
-    private var counter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +37,7 @@ class DiceRoller : AppCompatActivity() {
         MobileAds.initialize(this)
         loadAd()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            inAppReview()
-        }
+        inAppReview()
     }
 
     private fun showAd() {
@@ -72,7 +66,7 @@ class DiceRoller : AppCompatActivity() {
     private fun loadAd() {
         val adRequest = AdRequest.Builder().build()
 
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
+        InterstitialAd.load(this,"ca-app-pub-7588987461083278/5376328415", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d("AdMob", adError.message)
                 mInterstitialAd = null
@@ -101,20 +95,8 @@ class DiceRoller : AppCompatActivity() {
         }
     }
 
-
     override fun onPause() {
         super.onPause()
         saveData()
-    }
-
-    override fun onBackPressed() {
-        counter++
-        if (counter==1) {
-            saveData()
-            Toasty.custom(this, R.string.toast, R.drawable.ic_exit, R.color.toast,
-                Toast.LENGTH_LONG,true, true).show()
-        } else {
-            finish()
-        }
     }
 }
